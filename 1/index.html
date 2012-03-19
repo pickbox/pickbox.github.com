@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+
+  <!-- www.phpied.com/conditional-comments-block-downloads/ -->
+  <!--[if IE]><![endif]-->
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title></title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--  Mobile Viewport Fix
+        j.mp/mobileviewport & davidbcalhoun.com/2010/viewport-metatag 
+  device-width : Occupy full width of the screen in its current orientation
+  initial-scale = 1.0 retains dimensions instead of zooming out if page height > device height
+  maximum-scale = 1.0 retains dimensions instead of zooming in if page width < device width
+  -->
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+  <!-- CSS : implied media="all" -->
+  <link rel="stylesheet" href="css/style.css?v=1">
+
+  <!-- For the less-enabled mobile browsers like Opera Mini -->
+  <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1">
+
+ 
+  <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+  <script src="js/modernizr-1.5.min.js"></script>
+
+</head>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+
+<!--[if lt IE 7 ]> <body class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <body class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
+
+  <div id="container">
+    <header>
+    </header>
+    
+    <div id="main">
+      <div id="favorite">
+        <!-- sample code begin -->
+        <div class="block">
+          <div class="titlebar">
+            <span id="title">导航</span>
+            <li id="menu" class="menu">
+              <div class="menu_title"><a href="#" style="text-decoration: none;">更多操作
+                <span class="menu_title_indicator">&nbsp;&nbsp;</span>
+              </a></div>
+              <ul id="menu_items" class="menu_items">
+                <li id="menu_delete" class="menu_item"><a href="#" style="text-decoration: none;">删除</a></li>
+                <li id="menu_edit" class="menu_item"><a href="#" style="text-decoration: none;">修改</a></li>
+                <li id="menu_import" class="menu_item"><a href="#" style="text-decoration: none;">导入</a></li>
+                <li id="menu_export" class="menu_item"><a href="#" style="text-decoration: none;">导出</a></li>
+              </ul>
+            </li>
+            <button id="ok" class="ok">完成</button>
+          </div>
+          <ul id="list">
+            <li id="list_item" class="even">
+              <tr>
+              <td>
+              <span id="type" class="type">子类别</span>
+              <span id="seperator">|</span>
+              </td>
+              <td>
+              <span id="item" class="item">
+                <a id="a" href="#" title="谷歌资讯">谷歌资讯</a>
+              </span>
+              </td>
+              </tr>
+            </li>
+          </ul>
+        </div>
+        <!-- sample code for item edit -->
+        <li id="imenu" class="imenu">
+          <div id="imenu_title" class="imenu_title"></div>
+          <div id="imenu_items" class="imenu_items">
+            <table>
+              <tr class="imenu_item">
+                <td align="right"><span class="imenu_item_label">名称：</span></td>
+                <td><input id="imenu_item_name" class="imenu_item_editbox" type="text"></td>
+              </tr>
+              <tr class="imenu_item">
+                <td align="right"><span class="imenu_item_label">链接：</span></td>
+                <td><textarea id="imenu_item_link" class="imenu_item_editbox" type="text"></textarea></td>
+              </tr>
+              <tr class="imenu_item">
+                <td align="right"><span class="imenu_item_label">提示：</span></td>
+                <td><input id="imenu_item_prompt" class="imenu_item_editbox" type="text"></td>
+              </tr>
+              <tr><td></td>
+                <td><button id="imenu_ok">保存</button>
+                <button id="imenu_cancel">取消</button></td>
+              </tr>
+            </table>
+<!--             <div class="imenu_item">
+              <label class="imenu_item_label" for="imenu_item_name">链接：</label>
+              <input id="imenu_item_name" class="imenu_item_editbox" type="text" name="imenu_item_name" value="">
+            </div>
+            <div class="imenu_item">
+              <label class="imenu_item_label" for="imenu_item_name">提示：</label>
+              <input id="imenu_item_name" class="imenu_item_editbox" type="text" name="imenu_item_name" value="">
+            </div> -->
+          </div>
+        </li>
+        <!-- sample code end -->
+      </div>
+    </div>
+    
+    <footer>
+
+    </footer>
+  </div> <!--! end of #container -->
+
+
+  <!-- Javascript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
+  <script src="js/jquery-1.7.1.min.js"></script>
+  <script>!window.jQuery && document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"><\/script>')</script>
+
+
+  <script type="text/javascript" src="js/json2.js"></script>
+  <script type="text/javascript" src="js/util.js"></script>
+  <script src="js/plugins.js?v=1"></script>
+  <script src="js/script.js?v=1"></script>
+
+  <!--[if lt IE 7 ]>
+    <script src="js/dd_belatedpng.js?v=1"></script>
+  <![endif]-->
+
+
+  <!-- yui profiler and profileviewer - remove for production -->
+  <script src="js/profiling/yahoo-profiling.min.js?v=1"></script>
+  <script src="js/profiling/config.js?v=1"></script>
+  <!-- end profiling code -->
+
+
+  <!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet 
+       change the UA-XXXXX-X to be your site's ID -->
+<!--   <script>
+   var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = '//www.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script> -->  
+</body>
+</html>
