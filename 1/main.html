@@ -75,15 +75,21 @@
             <li id="list_item" class="even">
               <tr>
               <td>
-              <span id="type" class="type">子类别</span>
+              <span id="type" class="type">类别</span>
               <span id="seperator">|</span>
               </td>
               <td>
               <span id="item" class="item">
                 <a id="a" href="#" title="谷歌资讯">谷歌资讯</a>
               </span>
+              <span id="item_add" class="item_add">
+                <i>添加</i>
+              </span>
               </td>
               </tr>
+            </li>
+            <li id="list_item_add">
+              <i><a href="#">添加</a></i>
             </li>
           </ul>
         </div>
@@ -92,15 +98,15 @@
           <div id="imenu_title" class="imenu_title"></div>
           <div id="imenu_items" class="imenu_items">
             <table>
-              <tr class="imenu_item">
+              <tr id="tr_name" class="imenu_item">
                 <td align="right"><span class="imenu_item_label">名称：</span></td>
                 <td><input id="imenu_item_name" class="imenu_item_editbox" type="text"></td>
               </tr>
-              <tr class="imenu_item">
+              <tr id="tr_link" class="imenu_item">
                 <td align="right"><span class="imenu_item_label">链接：</span></td>
                 <td><textarea id="imenu_item_link" class="imenu_item_editbox" type="text"></textarea></td>
               </tr>
-              <tr class="imenu_item">
+              <tr id="tr_prompt" class="imenu_item">
                 <td align="right"><span class="imenu_item_label">提示：</span></td>
                 <td><input id="imenu_item_prompt" class="imenu_item_editbox" type="text"></td>
               </tr>
@@ -134,7 +140,7 @@
   <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
   <script src="js/jquery-1.7.1.min.js"></script>
   <script>!window.jQuery && document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"><\/script>')</script>
-
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
 
   <script type="text/javascript" src="js/json2.js"></script>
   <script type="text/javascript" src="js/util.js"></script>

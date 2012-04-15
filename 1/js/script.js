@@ -2,18 +2,38 @@
     
  */
 (function() {
-    var TEST_DATA = '[    {        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    },    {        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
+    // var TEST_DATA = '[    {        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    },    {        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
+    var TEST_DATA = '{        "title": "测试",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }';
+    var NAME = "jfo";
+
+    function handleItemDropEvent(event, ui) {
+        var offsetXPos = parseInt( ui.offset.left );
+        var offsetYPos = parseInt( ui.offset.top );
+        var draggable = ui.draggable;
+        var droppable = $(this);
+        var id = droppable.attr('id');
+        if (id === 'item') {
+            droppable.after(draggable);
+            draggable.attr("style", "position:relative;");
+        } else if (id === 'list_item') {
+            droppable.append(draggable);
+        }
+    }
+
     var Favorite = {
+        "jTemplateBlock": null,
         "load": function(json) {
             if (typeof json === "string")
                 json = JSON.parse(json);
+            if (this.jTemplateBlock === null)
+                this.jTemplateBlock = $("#favorite div.block");
             var jBlock = $("#favorite div.block");
             jBlock.remove();
-            for (var i=0; i < json.length; i++) {
-                var block = this.getBlockHtml(jBlock, json[i]);
+            // for (var i=0; i < json.length; i++) {
+                var block = this.getBlockHtml(this.jTemplateBlock, json);
                 this.initMenu(block);
                 $("#favorite").append(block);
-            };
+            // };
         },
         "getBlockHtml": function(jTemplate, json) {
             var list = json.list;
@@ -32,9 +52,10 @@
                 if (type) {
                     jListItem2.find("#type").text(type);
                 } else {
-                    jListItem2.find("#seperator").hide();
-                    jListItem2.find("#type").hide();
+                    // jListItem2.find("#seperator").hide();
+                    // jListItem2.find("#type").hide();
                 }
+                jListItem2.find("#item_add").hide();
                 for (var j=0; j < items.length; j++) {
                     var link = items[j].link;
                     var name = items[j].name;
@@ -48,10 +69,21 @@
                     jItem2link.attr("title", prompt);
                     jItem2link.text(name);
                     jListItem2.append(jItem2);
+                    this.attachDragAndDrop(jItem2, jBlock);
                 };
+                jListItem2.droppable({
+                    drop: handleItemDropEvent
+                });
                 jBlock.find("#list").append(jListItem2);
             };
             jBlock.find("#list #list_item:odd").addClass("even");
+            jBlock.find("#list_item_add").hide();
+            jBlock.find("#list").sortable({
+                update: function(){
+                    jBlock.find("#list #list_item:odd").addClass("even");
+                    jBlock.find("#list #list_item:even").removeClass("even");
+                }
+            });
             return jBlock;
         },
         "initMenu": function(jBlock) {
@@ -102,45 +134,22 @@
             });
             
             var jLink = jItem.find("#a");
-            jLink.each(function(){
-                var href = $(this).attr("href");
-                $(this).attr("data-href", href);
-                $(this).attr("href", "#");
-            });
+            this.inactivateLink(jLink);
         },
         "onEditMode": function(jBlock) {
             if (jBlock.attr("data-mode") == "edit")
                 return;
             jBlock.attr("data-mode", "edit");
             
-            var thiz = this;
             var jItem = jBlock.find("#item");
             var jLink = jItem.find("#a");
-            jLink.each(function(){
-                var href = $(this).attr("href");
-                $(this).attr("data-href", href);
-                $(this).attr("href", "#");
-            });
+            this.inactivateLink(jLink);
 
-            var jIMenu = $("#imenu").clone();
-            jItem.wrap(jIMenu);
-            var parent = jItem.parent();
-            parent.each(function() {
-                var menu_items = $(this).find("#imenu_items");
-                var item = $(this).find("#item");
-                var menu_title = $(this).find("#imenu_title");
-                item.remove();
-                menu_title.wrapInner(item);
-            });
-            parent.hover(
-                function() {
-                    $(this).children("#imenu_items").slideDown(150);
-                    thiz.onEdit($(this));
-                },
-                function() {
-                    $(this).children("#imenu_items").slideUp(150);
-                }
-            );
+            this.wrapIMenu(jItem);
+            var jItemAdd = jBlock.find("#item_add");
+            jItemAdd.show();
+            this.wrapIMenu(jItemAdd);
+            this.wrapIMenu(jBlock.find("#type"));
         },
         "onNormalMode": function(jBlock) {
             var mode = jBlock.attr("data-mode");
@@ -149,23 +158,19 @@
             jBlock.find("#ok").hide();
             jBlock.find("#menu").show();
             var jItem = jBlock.find("#item");
-            jItem.unbind();
             
             var jLink = jItem.find("#a");
-            jLink.each(function(){
-                var href = $(this).attr("data-href");
-                $(this).attr("href", href);
-                $(this).removeAttr("data-href");
-            });
+            this.activateLink(jLink);
             
             if (mode == "delete") {
-                
+                jItem.click(function(){});
             } else if (mode == "edit") {
-                var jIMenu = jBlock.find("#imenu");
-                var jItem = jBlock.find("#item");
-                jItem.unwrap();
-                jItem.siblings().remove();
-                jItem.unwrap();
+                this.unwrapIMenu(jBlock.find("#item"));
+                this.unwrapIMenu(jBlock.find("#item_add"));
+                jBlock.find("#item_add").hide();
+                this.unwrapIMenu(jBlock.find("#type"));
+                jItem.unbind();
+                this.attachDragAndDrop(jItem, jBlock);
             }
         },
         "onDelete": function(jBlock, jElem) {
@@ -180,6 +185,16 @@
             }
         },
         "onEdit": function(jElem) {
+            var jItem = jElem.find("#imenu_title").children(":first");
+            var id = jItem.attr("id");
+            if (id === "item")
+                this.onEditItem(jElem);
+            else if (id === "item_add")
+                this.onEditItemAdd(jElem);
+            else if (id === "type")
+                this.onEditItemType(jElem);
+        },
+        "onEditItem": function(jElem) {
             var thiz = this;
             var jItem = jElem.find("#item");
             var jLink = jItem.find("#a");
@@ -190,18 +205,78 @@
             jElem.find("#imenu_item_name").val(name);
             jElem.find("#imenu_item_link").val(link);
             jElem.find("#imenu_item_prompt").val(prompt);
-            jElem.find("#imenu_ok").click(function(){
+
+            var btnOk = jElem.find("#imenu_ok");
+            var btnCancel = jElem.find("#imenu_cancel");
+            btnOk.unbind();
+            btnCancel.unbind();
+            btnOk.click(function(){
                 var jThisLink = jElem.find("#a");
                 jThisLink.text(jElem.find("#imenu_item_name").val());
                 jThisLink.attr("data-href", jElem.find("#imenu_item_link").val());
                 jThisLink.attr("title", jElem.find("#imenu_item_prompt").val());
+                jElem.find("#imenu_items").slideUp(150);
             });
-            jElem.find("#imenu_cancel").click(function(){
+            btnCancel.click(function(){
+                jElem.find("#imenu_items").slideUp(150);
+            });
+        },
+        "onEditItemAdd": function(jElem) {
+            var thiz = this;
+            var btnOk = jElem.find("#imenu_ok");
+            var btnCancel = jElem.find("#imenu_cancel");
+            btnOk.unbind();
+            btnCancel.unbind();
+            btnOk.click(function(){
+                var jNewItem = thiz.jTemplateBlock.find("#item").clone();
+                var jNewElem = thiz.wrapIMenu(jNewItem);
+                
+                var jNewLink = jNewElem.find("#a");
+                thiz.inactivateLink(jNewLink);
+                jNewLink.text(jElem.find("#imenu_item_name").val());
+                jNewLink.attr("data-href", jElem.find("#imenu_item_link").val());
+                jNewLink.attr("title", jElem.find("#imenu_item_prompt").val());
+                
+                jElem.after(jNewElem);
+                jElem.find("#imenu_items").slideUp(150);
+            });
+            btnCancel.click(function(){
+                jElem.find("#imenu_items").slideUp(150);
+            });
+        },
+        "onEditItemType": function(jElem) {
+            var jItemType = jElem.find("#type");
+            var name = jItemType.text();
+            jElem.find("#imenu_item_name").val(name);
+            jElem.find("#tr_link").hide();
+            jElem.find("#tr_prompt").hide();
+
+            var btnOk = jElem.find("#imenu_ok");
+            var btnCancel = jElem.find("#imenu_cancel");
+            btnOk.unbind();
+            btnCancel.unbind();
+            btnOk.click(function(){
+                jItemType.text(jElem.find("#imenu_item_name").val());
+                jElem.find("#imenu_items").slideUp(150);
+            });
+            btnCancel.click(function(){
                 jElem.find("#imenu_items").slideUp(150);
             });
         },
         "onImport": function(jBlock) {
-            alert("TODO");
+            var thiz = this;
+            $.post("http://justlog.sinaapp.com/api/http_address/list/",
+                {user:NAME}
+            )
+            .error(function(ret){alert("import fail. " + ret);})
+            .success(function(ret){
+                var objRet = JSON.parse(ret);
+                var record = objRet.data.items[0];
+                log(record);
+                var data = record.data;
+                log(data);
+                thiz.load(data);
+            });
         },
         "onExport": function(jBlock) {
             var data = {};
@@ -228,18 +303,75 @@
             data.list = list;
             var value = JSON.stringify(data);
             log(value);
-            $.post("http://justlog.sinaapp.com/api/http_address/insert/",
-                {data:value},
-                function(data){
-                    alert("Data loaded: " + data);
-                });
+            $.post("http://justlog.sinaapp.com/api/http_address/update/",
+                {data:value,user:NAME}
+            )
+            .error(function(ret){alert("export fail. " + ret);})
+            .success(function(ret){alert("export success. " + ret);});
+        },
+        "wrapIMenu": function(jItem) {
+            var thiz = this;
+            var jIMenu = $("#imenu").clone();
+            jItem.wrap(jIMenu);
+            var parent = jItem.parent();
+            parent.each(function() {
+                var menu_items = $(this).find("#imenu_items");
+                var item = $(this).children(":last");
+                var menu_title = $(this).find("#imenu_title");
+                item.remove();
+                menu_title.wrapInner(item);
+            });
+            parent.hover(
+                function() {
+                    $(this).children("#imenu_items").slideDown(150);
+                    thiz.onEdit($(this));
+                },
+                function() {
+                    $(this).children("#imenu_items").slideUp(150);
+                }
+            );
+            return parent;
+        },
+        "unwrapIMenu": function(jItem) {
+            jItem.unwrap();
+            jItem.siblings().remove();
+            jItem.unwrap();
+        },
+        "inactivateLink": function(jLink) {
+            jLink.each(function(){
+                var href = $(this).attr("href");
+                $(this).attr("data-href", href);
+                $(this).attr("href", "#");
+            });
+        },
+        "activateLink": function(jLink) {
+            jLink.each(function(){
+                var href = $(this).attr("data-href");
+                $(this).attr("href", href);
+                $(this).removeAttr("data-href");
+            });
+        },
+        "attachDragAndDrop": function(jItem, jBlock) {
+            jItem.draggable({
+                containment: jBlock,
+                revert: true
+            });
+            jItem.droppable({
+                drop: handleItemDropEvent
+            });
+        },
+        "swapItem": function(jItem1, jItem2) {
+            var placeHolder = $("<div/>");
+            jItem1.before(placeHolder);
+            jItem2.after(jItem1);
+            placeHolder.after(jItem2);
+            placeHolder.remove();
         },
         "test": function() {
             this.load(TEST_DATA);
         }
     }
     window.Favorite = Favorite;
-    
 })();
 
 Favorite.test();
