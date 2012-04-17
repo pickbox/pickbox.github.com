@@ -77,8 +77,11 @@
                 jBlock.find("#list").append(jListItem2);
             };
             jBlock.find("#list #list_item:odd").addClass("even");
-            jBlock.find("#list_item_add").hide();
+            var listItemAdd = jBlock.find("#list_item_add");
+            jBlock.find("#list").append(listItemAdd);
+            listItemAdd.hide();
             jBlock.find("#list").sortable({
+            	items: '#list_item',
                 update: function(){
                     jBlock.find("#list #list_item:odd").addClass("even");
                     jBlock.find("#list #list_item:even").removeClass("even");
@@ -150,6 +153,9 @@
             jItemAdd.show();
             this.wrapIMenu(jItemAdd);
             this.wrapIMenu(jBlock.find("#type"));
+            var jListItemAdd = jBlock.find("#list_item_add");
+            jListItemAdd.show();
+            this.wrapIMenu(jListItemAdd.find("#list_item_add_item"));
         },
         "onNormalMode": function(jBlock) {
             var mode = jBlock.attr("data-mode");
@@ -171,6 +177,8 @@
                 this.unwrapIMenu(jBlock.find("#type"));
                 jItem.unbind();
                 this.attachDragAndDrop(jItem, jBlock);
+                jBlock.find("#list_item_add").hide();
+                this.unwrapIMenu(jBlock.find("#list_item_add_item"));
             }
         },
         "onDelete": function(jBlock, jElem) {
@@ -193,6 +201,8 @@
                 this.onEditItemAdd(jElem);
             else if (id === "type")
                 this.onEditItemType(jElem);
+            else if (id === "list_item_add_item")
+                this.onEditListItemAdd(jElem);
         },
         "onEditItem": function(jElem) {
             var thiz = this;
@@ -258,6 +268,35 @@
             btnOk.click(function(){
                 jItemType.text(jElem.find("#imenu_item_name").val());
                 jElem.find("#imenu_items").slideUp(150);
+            });
+            btnCancel.click(function(){
+                jElem.find("#imenu_items").slideUp(150);
+            });
+        },
+        "onEditListItemAdd": function(jElem) {
+            var thiz = this;
+            jElem.find("#tr_link").hide();
+            jElem.find("#tr_prompt").hide();
+            
+            var btnOk = jElem.find("#imenu_ok");
+            var btnCancel = jElem.find("#imenu_cancel");
+            btnOk.unbind();
+            btnCancel.unbind();
+            btnOk.click(function(){
+            	var itemType = jElem.find("#imenu_item_name").val();
+            	if (itemType) {
+                    var jListItem2 = thiz.jTemplateBlock.find("#list_item").clone();
+                    jListItem2.find("#item").remove();
+                    jListItem2.find("#type").text(itemType);
+                    thiz.wrapIMenu(jListItem2.find("#type"));
+                    thiz.wrapIMenu(jListItem2.find("#item_add"));
+                    jElem.parent().before(jListItem2);
+                    
+                    var jBlock = jElem.parents(".block");
+                    jBlock.find("#list #list_item:odd").addClass("even");
+                    jBlock.find("#list #list_item:even").removeClass("even");
+            	}
+            	jElem.find("#imenu_items").slideUp(150);
             });
             btnCancel.click(function(){
                 jElem.find("#imenu_items").slideUp(150);

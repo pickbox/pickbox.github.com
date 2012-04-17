@@ -226,7 +226,7 @@ ul, ol, li {
     text-overflow: clip;
     overflow: hidden;
 }
-.block #list_item {
+.block .list_item {
     line-height: 20px;
     vertical-align: middle;
     padding: 0 10px;
