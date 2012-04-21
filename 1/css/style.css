@@ -209,6 +209,8 @@ ul, ol, li {
     width: 350px;
     display: block;
     margin: 5px;
+    border: 1px solid #C4C4C4;
+    border-top: 0;
 }
 .titlebar {
     font-weight: bold;
@@ -217,6 +219,7 @@ ul, ol, li {
     padding: 0px 5px;
     background-color: #E9F6FF;
     border-bottom: 1px solid #EEE;
+    background: url(../images/round-top-center.gif) repeat-x;
 }
 .type {
     color: #108410;
@@ -249,11 +252,11 @@ ul, ol, li {
     display: none;
     position: absolute;
     width: 100%;
+    background-color: #E9F6FF;
 }
 .menu_title, .menu_item {
     text-decoration: none;
     padding: 0 5px;
-    background-color: #E9F6FF;
 }
 .menu_title:hover, .menu_item:hover {
     background-color: #D9E6FF;
