@@ -32,8 +32,10 @@
     var Favorite = {
         "jTemplateBlock": null,
         "init": function() {
-            if (this.jTemplateBlock === null)
+            if (this.jTemplateBlock === null) {
                 this.jTemplateBlock = $("#favorite div.block");
+                this.jTemplateBlock.show();
+            }
             var jBlock = $("#favorite div.block");
             jBlock.remove();
             if (!FAVORITE_DATA)
