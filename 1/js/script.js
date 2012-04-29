@@ -2,10 +2,19 @@
     
  */
 (function() {
-    // var TEST_DATA = '[    {        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    },    {        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
-    var TEST_DATA = '{        "title": "测试",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }';
-    var NAME = "jfo";
-
+    var TEST_DATA = '[    {        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    },    {        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
+    // var TEST_DATA = '[{        "title": "测试",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
+    var KEY_USER_ID = "user_id";
+    var USER_ID = $.jStorage.get(KEY_USER_ID);
+    var KEY_FAVORITE_DATA = "favorite";
+    var FAVORITE_DATA = $.jStorage.get(KEY_FAVORITE_DATA);
+    
+    function uuid() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                    var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x8;
+                    return v.toString(16);
+                });
+    }
     function handleItemDropEvent(event, ui) {
         var offsetXPos = parseInt( ui.offset.left );
         var offsetYPos = parseInt( ui.offset.top );
@@ -22,20 +31,28 @@
 
     var Favorite = {
         "jTemplateBlock": null,
-        "load": function(json) {
-            if (typeof json === "string")
-                json = JSON.parse(json);
+        "init": function() {
             if (this.jTemplateBlock === null)
                 this.jTemplateBlock = $("#favorite div.block");
             var jBlock = $("#favorite div.block");
             jBlock.remove();
-            // for (var i=0; i < json.length; i++) {
-                var block = this.getBlockHtml(this.jTemplateBlock, json);
+            if (!FAVORITE_DATA)
+                FAVORITE_DATA = "[]";
+            if (!USER_ID)
+                USER_ID = "jfo";//uuid();
+        },
+        "load": function(json) {
+            this.init();
+            this.initFavoriteMenu();
+            if (typeof json === "string")
+                json = $.evalJSON(json);
+            for (var i=0; i < json.length; i++) {
+                var block = this.getBlock(this.jTemplateBlock, json[i]);
                 this.initMenu(block);
                 $("#favorite").append(block);
-            // };
+            };
         },
-        "getBlockHtml": function(jTemplate, json) {
+        "getBlock": function(jTemplate, json) {
             var list = json.list;
             var title = json.title;
             var jBlock = jTemplate.clone();
@@ -89,6 +106,47 @@
             });
             return jBlock;
         },
+        "initFavoriteMenu": function() {
+            var thiz = this;
+            var jFavoriteMenu = $("#favorite_menu");
+            jFavoriteMenu.hover(
+                function() {
+                    $(this).children("#menu_items").slideDown(150);
+                },
+                function() {
+                    $(this).children("#menu_items").slideUp(150);
+                }
+            );
+            jFavoriteMenu.find("#menu_import").click(function(){
+                $.post("http://justlog.sinaapp.com/api/http_address/list/",
+                    {user:USER_ID}
+                )
+                .error(function(ret){alert("import fail. " + ret);})
+                .success(function(ret){
+                    var objRet = $.evalJSON(ret);
+                    var record = objRet.data.items[0];
+                    log(record);
+                    var data = record.data;
+                    log(data);
+                    FAVORITE_DATA = data;
+                    $.jStorage.set(KEY_FAVORITE_DATA, FAVORITE_DATA);
+                    thiz.load(data);
+                });
+            });
+            jFavoriteMenu.find("#menu_export").click(function(){
+                var arr = [];
+                $("#favorite").find(".block").each(function(){
+                    var s = thiz.onExport($(this));
+                    arr = arr.concat(s);
+                });
+                var json = "[" + arr.join(",") + "]";
+                $.post("http://justlog.sinaapp.com/api/http_address/update/",
+                    {data:json,user:USER_ID}
+                )
+                .error(function(ret){alert("export fail. " + ret);})
+                .success(function(ret){alert("export success. " + ret);});
+            });
+        },
         "initMenu": function(jBlock) {
             var thiz = this;
             jMenu = jBlock.find("#menu");
@@ -110,16 +168,16 @@
                 jBlock.find("#menu").hide();
                 jBlock.find("#ok").show();
             });
-            jMenu.find("#menu_import").click(function(){
-                thiz.onImport(jBlock);
-                jBlock.find("#menu").hide();
-                jBlock.find("#ok").show();
-            });
-            jMenu.find("#menu_export").click(function(){
-                thiz.onExport(jBlock);
-                jBlock.find("#menu").hide();
-                jBlock.find("#ok").show();
-            });
+            // jMenu.find("#menu_import").click(function(){
+                // thiz.onImport(jBlock);
+                // jBlock.find("#menu").hide();
+                // jBlock.find("#ok").show();
+            // });
+            // jMenu.find("#menu_export").click(function(){
+                // thiz.onExport(jBlock);
+                // jBlock.find("#menu").hide();
+                // jBlock.find("#ok").show();
+            // });
             jBlock.find("#ok").hide();
             jBlock.find("#ok").click(function(){
                 thiz.onNormalMode(jBlock);
@@ -156,6 +214,7 @@
             var jListItemAdd = jBlock.find("#list_item_add");
             jListItemAdd.show();
             this.wrapIMenu(jListItemAdd.find("#list_item_add_item"));
+            this.wrapIMenu(jBlock.find("#title"));
         },
         "onNormalMode": function(jBlock) {
             var mode = jBlock.attr("data-mode");
@@ -179,6 +238,7 @@
                 this.attachDragAndDrop(jItem, jBlock);
                 jBlock.find("#list_item_add").hide();
                 this.unwrapIMenu(jBlock.find("#list_item_add_item"));
+                this.unwrapIMenu(jBlock.find("#title"));
             }
         },
         "onDelete": function(jBlock, jElem) {
@@ -203,6 +263,8 @@
                 this.onEditItemType(jElem);
             else if (id === "list_item_add_item")
                 this.onEditListItemAdd(jElem);
+            else if (id === "title")
+                this.onEditTitle(jElem);
         },
         "onEditItem": function(jElem) {
             var thiz = this;
@@ -302,20 +364,29 @@
                 jElem.find("#imenu_items").slideUp(150);
             });
         },
-        "onImport": function(jBlock) {
-            var thiz = this;
-            $.post("http://justlog.sinaapp.com/api/http_address/list/",
-                {user:NAME}
-            )
-            .error(function(ret){alert("import fail. " + ret);})
-            .success(function(ret){
-                var objRet = JSON.parse(ret);
-                var record = objRet.data.items[0];
-                log(record);
-                var data = record.data;
-                log(data);
-                thiz.load(data);
+        "onEditTitle": function(jElem) {
+            var jTitle = jElem.find("#title");
+            var name = jTitle.text();
+            jElem.find("#imenu_item_name").val(name);
+            jElem.find("#tr_link").hide();
+            jElem.find("#tr_prompt").hide();
+
+            var btnOk = jElem.find("#imenu_ok");
+            var btnCancel = jElem.find("#imenu_cancel");
+            btnOk.unbind();
+            btnCancel.unbind();
+            btnOk.click(function(){
+                jTitle.text(jElem.find("#imenu_item_name").val());
+                jElem.find("#imenu_items").slideUp(150);
             });
+            btnCancel.click(function(){
+                jElem.find("#imenu_items").slideUp(150);
+            });
+        },
+        "onImport": function(jBlock, json) {
+            var jBlock2 = this.getBlock(this.jTemplateBlock, json);
+            jBlock.after(jBlock2);
+            jBlock.remove();
         },
         "onExport": function(jBlock) {
             var data = {};
@@ -340,13 +411,8 @@
                 list.push(list_item);
             });
             data.list = list;
-            var value = JSON.stringify(data);
-            log(value);
-            $.post("http://justlog.sinaapp.com/api/http_address/update/",
-                {data:value,user:NAME}
-            )
-            .error(function(ret){alert("export fail. " + ret);})
-            .success(function(ret){alert("export success. " + ret);});
+            var value = $.toJSON(data);
+            return value;
         },
         "wrapIMenu": function(jItem) {
             var thiz = this;
@@ -407,11 +473,12 @@
             placeHolder.remove();
         },
         "test": function() {
-            this.load(TEST_DATA);
+            this.load(FAVORITE_DATA);
         }
     }
     window.Favorite = Favorite;
 })();
 
+Favorite.init();
 Favorite.test();
 

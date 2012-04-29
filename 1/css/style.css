@@ -204,6 +204,30 @@ ul, ol, li {
     list-style: none;
     margin: 0;
 }
+
+.userbar {
+    height: 27px;
+    font-size: 12px;
+    min-width: 960px;
+    color: #666;
+    background: #F7F7F7 url(http://s1.hao123img.com/index/images/main1.png) repeat-x 0 0;
+    border-bottom: 1px solid #E8E8E9;
+}
+.box {
+    width: 960px;
+    margin: 0 auto;
+}
+.ft-l {
+    float: left;
+}
+.ft-r {
+    float: right;
+}
+.nav-item {
+    line-height: 27px;
+    text-align: center;
+}
+
 .block {
     float: left;
     width: 350px;
@@ -223,6 +247,10 @@ ul, ol, li {
 }
 .type {
     color: #108410;
+    border-radius: 3px;
+    width: 40px;
+    display: inline-block;
+    text-align: center;
 }
 .item {
     color: #6A6D74;
@@ -246,6 +274,7 @@ ul, ol, li {
     font-weight: normal;
     font-size: 0.7em;
     position: relative;
+    line-height: 25px;
 }
 .menu_items {
     z-index: 99;
@@ -290,6 +319,8 @@ ul, ol, li {
     position: absolute;
     background-color: #FFFFD0;
     padding: 5px 5px;
+    font-size: 13px;
+    font-weight: normal;
 }
 .imenu_close {
     float: right;
