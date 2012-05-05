@@ -18,6 +18,13 @@ $.fn.spin = function(opts) {
     return this;
 };
 (function() {
+    var TEST = true;
+    var HOST = TEST ? "http://127.0.0.1" : "http://justlog.sinaapp.com";
+    var URL_USER_INSERT = HOST + "/api/user/insert/";
+    var URL_GET_TOKEN = HOST + "/api/user/get_token/";
+    var URL_FAV_INSERT = HOST + "/api/http_address/insert/";
+    var URL_FAV_LIST = HOST + "/api/http_address/list/";
+
     var TEST_DATA = '[    {        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    },    {        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
     // var TEST_DATA = '[{        "title": "测试",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
     var KEY_USER_ID = "user_id";
@@ -204,7 +211,7 @@ $.fn.spin = function(opts) {
 
     function register(name, password, onError, onSuccess) {
         var passwdMd5 = $.md5(password);
-        $.post("http://justlog.sinaapp.com/api/user/insert/", {
+        $.post(URL_USER_INSERT, {
             account: name,
             password: passwdMd5
         }).error(onError).success(onSuccess);
@@ -215,7 +222,7 @@ $.fn.spin = function(opts) {
     }
 
     function getToken(name, password, onError, onSuccess) {
-        $.post("https://justlog.sinaapp.com/api/user/get_token/", {
+        $.post(URL_GET_TOKEN, {
             account: name,
             password: password
         }).error(onError).success( function(ret) {
@@ -237,8 +244,9 @@ $.fn.spin = function(opts) {
     }
 
     function insertFavorite() {
-        $.post("http://justlog.sinaapp.com/api/http_address/insert/", {
+        $.post(URL_FAV_INSERT, {
             data: "[]",
+            dataType: "json",
             user: USER_ID,
             token: TOKEN
         }).error( function(ret) {
@@ -705,7 +713,7 @@ $.fn.spin = function(opts) {
         "test": function() {
             this.load(FAVORITE_DATA);
             $("#btn").click( function() {
-                $.post("http://justlog.sinaapp.com/api/http_address/list/", {
+                $.post(URL_FAV_LIST, {
                     user: USER_ID,
                     token: TOKEN
                 }).error( function(ret) {
