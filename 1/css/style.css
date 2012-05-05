@@ -252,6 +252,15 @@ ul, ol, li {
     background-position: -6px -39px;
 }
 
+.user_name {
+    float: right;
+    font-weight: bold;
+    font-size: 1.2em;
+    position: relative;
+    line-height: 25px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
 
 .dialog {}
 .dialog td {
@@ -263,6 +272,7 @@ ul, ol, li {
 }
 
 .ui-progressbar-value { background-image: url(images/pbar-ani.gif); }
+
 
 
 

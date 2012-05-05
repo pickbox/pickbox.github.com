@@ -25,14 +25,17 @@ $.fn.spin = function(opts) {
     var URL_FAV_INSERT = HOST + "/api/http_address/insert/";
     var URL_FAV_LIST = HOST + "/api/http_address/list/";
 
-    var TEST_DATA = '[    {        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    },    {        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
+    var TEST_DATA = '[{        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
     // var TEST_DATA = '[{        "title": "测试",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
+    TEST_DATA = $.toJSON($.evalJSON(TEST_DATA));
     var KEY_USER_ID = "user_id";
-    var USER_ID = $.jStorage.get(KEY_USER_ID);
+    var USER_ID = $.jStorage.get(KEY_USER_ID) || "";
+    var KEY_USER_NAME = "user_name";
+    var USER_NAME = $.jStorage.get(KEY_USER_NAME) || "";
     var KEY_FAVORITE_DATA = "favorite";
-    var FAVORITE_DATA = $.jStorage.get(KEY_FAVORITE_DATA);
+    var FAVORITE_DATA = $.jStorage.get(KEY_FAVORITE_DATA) || TEST_DATA;
     var KEY_TOKEN = "token";
-    var TOKEN = $.jStorage.get(KEY_TOKEN);
+    var TOKEN = $.jStorage.get(KEY_TOKEN) || "";
 
     function uuid() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -214,11 +217,23 @@ $.fn.spin = function(opts) {
         $.post(URL_USER_INSERT, {
             account: name,
             password: passwdMd5
-        }).error(onError).success(onSuccess);
+        }).error(onError).success( function(ret) {
+            var errCode = onSuccess(ret);
+            if (errCode == 0) {
+                getToken(name, password, function() {
+                }, function() {
+                    insertFavorite();
+                });
+            }
+        });
     }
 
     function login(name, password, onError, onSuccess) {
-        getToken(name, password, onError, onSuccess);
+        getToken(name, password, onError, function(ret) {
+            var errCode = onSuccess(ret);
+            if (errCode == 0)
+                checkLogin();
+        });
     }
 
     function getToken(name, password, onError, onSuccess) {
@@ -226,26 +241,25 @@ $.fn.spin = function(opts) {
             account: name,
             password: password
         }).error(onError).success( function(ret) {
-            var errCode = onSuccess(ret);
-            if (errCode != 0)
-                return;
             var jObj = $.evalJSON(ret);
-            if (!jObj || !jObj.data)
+            if (!jObj || !jObj.data || jObj.err_code != 0)
                 return;
             var token = jObj.data.token;
             var uid = jObj.data.uid;
             log("token:" + token + ",uid:" + uid);
             $.jStorage.set(KEY_USER_ID, uid);
             $.jStorage.set(KEY_TOKEN, token);
+            $.jStorage.set(KEY_USER_NAME, name);
             USER_ID = uid;
             TOKEN = token;
-            insertFavorite();
+            USER_NAME = name;
+            onSuccess(ret);
         });
     }
 
     function insertFavorite() {
         $.post(URL_FAV_INSERT, {
-            data: "[]",
+            data: TEST_DATA,
             dataType: "json",
             user: USER_ID,
             token: TOKEN
@@ -253,26 +267,115 @@ $.fn.spin = function(opts) {
             log(ret);
         }).success( function(ret) {
             log(ret);
+            checkLogin();
+        });
+    }
+
+    function clear() {
+        $("#nav_user_name").text("");
+    }
+
+    function fill() {
+        $("#nav_user_name").text(USER_NAME);
+        Favorite.load(FAVORITE_DATA);
+    }
+
+    function checkLogin() {
+        if (!USER_ID || !TOKEN) {
+            clear();
+            return;
+        }
+        $.post(URL_FAV_LIST, {
+            user: USER_ID,
+            token: TOKEN
+        }).error( function(ret) {
+            log(ret);
+            clear();
+        }).success( function(ret) {
+            log(ret);
+            var jObj = $.evalJSON(ret);
+            if (!jObj || jObj.err_code != 0 || !jObj.data) {
+                clear();
+                return;
+            }
+            var info = jObj.data.items[0];
+            $.jStorage.set(KEY_FAVORITE_DATA, info.data);
+            FAVORITE_DATA = info.data;
+            fill();
         });
     }
 
     var Favorite = {
         "jTemplateBlock": null,
         "init": function() {
+            this.initUI();
+            checkLogin();
+        },
+        "initUI": function() {
             if (this.jTemplateBlock === null) {
                 this.jTemplateBlock = $("#favorite div.block");
                 this.jTemplateBlock.show();
             }
             var jBlock = $("#favorite div.block");
             jBlock.remove();
-            if (!FAVORITE_DATA)
-                FAVORITE_DATA = "[]";
-            if (!USER_ID)
-                USER_ID = "guest";//uuid();
+            this.initFavoriteMenu();
+        },
+        "initFavoriteMenu": function() {
+            var thiz = this;
+            var jFavoriteMenu = $("#favorite_menu");
+            jFavoriteMenu.hover( function() {
+                $(this).children("#menu_items").slideDown(150);
+            }, function() {
+                $(this).children("#menu_items").slideUp(150);
+            });
+            jFavoriteMenu.find("#menu_import").click( function() {
+                $.post("http://justlog.sinaapp.com/api/http_address/list/", {
+                    user: USER_ID
+                }).error( function(ret) {
+                    alert("import fail. " + ret);
+                }).success( function(ret) {
+                    var objRet = $.evalJSON(ret);
+                    var record = objRet.data.items[0];
+                    log(record);
+                    var data = record.data;
+                    log(data);
+                    FAVORITE_DATA = data;
+                    $.jStorage.set(KEY_FAVORITE_DATA, FAVORITE_DATA);
+                    thiz.load(data);
+                });
+            });
+            jFavoriteMenu.find("#menu_export").click( function() {
+                var arr = [];
+                $("#favorite").find(".block").each( function() {
+                    var s = thiz.onExport($(this));
+                    arr = arr.concat(s);
+                });
+                var json = "[" + arr.join(",") + "]";
+                $.post("http://justlog.sinaapp.com/api/http_address/update/", {
+                    data: json,
+                    user: USER_ID
+                }).error( function(ret) {
+                    alert("export fail. " + ret);
+                }).success( function(ret) {
+                    alert("export success. " + ret);
+                });
+            });
+            var jNavItem = $("#nav_profile");
+            jNavItem.hover( function() {
+                $(this).children("#menu_items").slideDown(150);
+            }, function() {
+                $(this).children("#menu_items").slideUp(150);
+            });
+            jNavItem.find("#login").click( function() {
+                showDialog($("#dialog-login"));
+            });
+            jNavItem.find("#register").click( function() {
+                showDialog($("#dialog-register"));
+            });
         },
         "load": function(json) {
-            this.init();
-            this.initFavoriteMenu();
+            var jBlock = $("#favorite div.block");
+            jBlock.remove();
             if (typeof json === "string")
                 json = $.evalJSON(json);
             for (var i = 0; i < json.length; i++) {
@@ -337,59 +440,6 @@ $.fn.spin = function(opts) {
                 }
             });
             return jBlock;
-        },
-        "initFavoriteMenu": function() {
-            var thiz = this;
-            var jFavoriteMenu = $("#favorite_menu");
-            jFavoriteMenu.hover( function() {
-                $(this).children("#menu_items").slideDown(150);
-            }, function() {
-                $(this).children("#menu_items").slideUp(150);
-            });
-            jFavoriteMenu.find("#menu_import").click( function() {
-                $.post("http://justlog.sinaapp.com/api/http_address/list/", {
-                    user: USER_ID
-                }).error( function(ret) {
-                    alert("import fail. " + ret);
-                }).success( function(ret) {
-                    var objRet = $.evalJSON(ret);
-                    var record = objRet.data.items[0];
-                    log(record);
-                    var data = record.data;
-                    log(data);
-                    FAVORITE_DATA = data;
-                    $.jStorage.set(KEY_FAVORITE_DATA, FAVORITE_DATA);
-                    thiz.load(data);
-                });
-            });
-            jFavoriteMenu.find("#menu_export").click( function() {
-                var arr = [];
-                $("#favorite").find(".block").each( function() {
-                    var s = thiz.onExport($(this));
-                    arr = arr.concat(s);
-                });
-                var json = "[" + arr.join(",") + "]";
-                $.post("http://justlog.sinaapp.com/api/http_address/update/", {
-                    data: json,
-                    user: USER_ID
-                }).error( function(ret) {
-                    alert("export fail. " + ret);
-                }).success( function(ret) {
-                    alert("export success. " + ret);
-                });
-            });
-            var jNavItem = $("#nav_profile");
-            jNavItem.hover( function() {
-                $(this).children("#menu_items").slideDown(150);
-            }, function() {
-                $(this).children("#menu_items").slideUp(150);
-            });
-            jNavItem.find("#login").click( function() {
-                showDialog($("#dialog-login"));
-            });
-            jNavItem.find("#register").click( function() {
-                showDialog($("#dialog-register"));
-            });
         },
         "initMenu": function(jBlock) {
             var thiz = this;
@@ -711,8 +761,7 @@ $.fn.spin = function(opts) {
             placeHolder.remove();
         },
         "test": function() {
-            this.load(FAVORITE_DATA);
-            $("#btn").click( function() {
+            $("#add_block").click( function() {
                 $.post(URL_FAV_LIST, {
                     user: USER_ID,
                     token: TOKEN
@@ -724,9 +773,13 @@ $.fn.spin = function(opts) {
                     log(ret + "\n" + TOKEN);
                 });
             });
+        },
+        "go": function() {
+            this.init();
+            this.load(FAVORITE_DATA);
         }
     }
     window.Favorite = Favorite;
 })();
-Favorite.init();
+Favorite.go();
 Favorite.test();
