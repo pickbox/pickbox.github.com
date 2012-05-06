@@ -40,6 +40,12 @@ $.fn.spin = function(opts) {
     var KEY_TOKEN = "token";
     var TOKEN = $.jStorage.get(KEY_TOKEN) || "";
 
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        // Great success! All the File APIs are supported.
+    } else {
+        alert('The File APIs are not fully supported in this browser.');
+    }
+
     function uuid() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             var r = Math.random() * 16 | 0, v = c == 'x' ? r : r & 0x3 | 0x8;
@@ -122,9 +128,9 @@ $.fn.spin = function(opts) {
                 "注册": function() {
                     var thiz = this;
                     tips.hide();
-                    var bValid = true;
                     allFields.removeClass("ui-state-error");
 
+                    var bValid = true;
                     bValid = bValid && checkLength(name, "username", 3, 16);
                     bValid = bValid && checkLength(password, "password", 5, 16);
                     bValid = bValid && checkLength(password2, "confirm password", 5, 16);
@@ -176,9 +182,9 @@ $.fn.spin = function(opts) {
                 "登录": function() {
                     var thiz = this;
                     tips.hide();
-                    var bValid = true;
                     allFields.removeClass("ui-state-error");
 
+                    var bValid = true;
                     bValid = bValid && checkLength(name, "username", 3, 16);
                     bValid = bValid && checkLength(password, "password", 5, 16);
 
@@ -209,6 +215,60 @@ $.fn.spin = function(opts) {
                 "取消": function() {
                     $(this).dialog("close");
                 }
+            }
+        });
+
+        var selectedFile;
+        $("#dialog-import").dialog({
+            autoOpen: false,
+            width: 400,
+            height: 240,
+            modal: true,
+            buttons: {
+                "上传": function() {
+                    var thiz = this;
+                    tips.hide();
+                    allFields.removeClass("ui-state-error");
+
+                    var file = selectedFile;
+                    var reader = new FileReader();
+                    reader.onload = function() {
+                        var json = this.result;
+                        $.post(URL_FAV_UPDATE, {
+                            data: json,
+                            user: USER_ID,
+                            token: TOKEN
+                        }).error( function(ret) {
+                            log(ret);
+                            updateTips("很抱歉，导入失败，请重试...");
+                        }).success( function(ret) {
+                            log(ret);
+                            var objRet = $.evalJSON(ret);
+                            if (!objRet || objRet.err_code != 0 || !objRet.data) {
+                                updateTips("很抱歉，导入失败，请重试...");
+                                return;
+                            }
+                            checkLogin(); // will refresh content
+                            $(thiz).dialog("close");
+                            alert("导入成功！");
+                        });
+                    }
+                    reader.readAsText(file);
+                },
+                "取消": function() {
+                    $(this).dialog("close");
+                }
+            },
+            open: function(event, ui) {
+                $("#datafile").on("change", function(event) {
+                    var fileList = this.files;
+                    var file = fileList[0];
+                    updateTips(
+                    file.name + " - " +
+                    file.size + " bytes, " +
+                    (file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : ""));
+                    selectedFile = file;
+                });
             }
         });
 
@@ -408,26 +468,29 @@ $.fn.spin = function(opts) {
             jNavItem.find("#sync").click( function() {
                 sync();
             });
-            // --- will delete
-            jNavItem.find("#orig_import").click( function() {
-                $.post(URL_FAV_LIST, {
-                    user: USER_ID
-                }).error( function(ret) {
-                    alert("import fail. " + ret);
-                }).success( function(ret) {
-                    var objRet = $.evalJSON(ret);
-                    var record = objRet.data.items[0];
-                    log(record);
-                    var data = record.data;
-                    log(data);
-                    FAVORITE_DATA = data;
-                    $.jStorage.set(KEY_FAVORITE_DATA, FAVORITE_DATA);
-                    thiz.load(data);
-                });
-            });
             jNavItem.find("#import").click( function() {
+                showDialog($("#dialog-import"));
             });
             jNavItem.find("#export").click( function() {
+                $.post(URL_FAV_LIST, {
+                    user: USER_ID,
+                    token: TOKEN
+                }).error( function(ret) {
+                    log(ret);
+                    alert("抱歉，导出失败，请重试...");
+                }).success( function(ret) {
+                    log(ret);
+                    var objRet = $.evalJSON(ret);
+                    if (!objRet || objRet.err_code != 0 || !objRet.data) {
+                        alert("抱歉，导出失败，请重试...");
+                    }
+                    var data = objRet.data.items[0].data;
+                    var json = $.toJSON(data);
+                    log(json);
+                    var bb = new BlobBuilder;
+                    bb.append(json);
+                    saveAs(bb.getBlob("text/plain;charset=utf-8"), "favorite.json");
+                });
             });
             $("#add_block").click( function() {
                 var jBlock = thiz.getBlock(thiz.jTemplateBlock, $.evalJSON(thiz.jTemplateBlockJson));

@@ -42,6 +42,8 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
   <script src="js/spin.min.js"></script>
   <script src="js/jquery.md5.js"></script>
+  <script src="js/BlobBuilder.min.js"></script>
+  <script src="js/FileSaver.min.js"></script>
   <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 
 </head>
@@ -70,7 +72,7 @@
             <li id="register" class="menu_item"><a href="#" style="text-decoration: none;">注册</a></li>
             </span>
             <span id="user" style="display: none">
-            <li id="sync" class="menu_item"><a href="#" style="text-decoration: none;">同步到服务器</a></li>
+            <li id="sync" class="menu_item"><a href="#" style="text-decoration: none;">同步到云端</a></li>
             <li id="import" class="menu_item divider"><a href="#" style="text-decoration: none;">导入</a></li>
             <li id="export" class="menu_item"><a href="#" style="text-decoration: none;">导出</a></li>
             <li id="logout" class="menu_item divider"><a href="#" style="text-decoration: none;">退出</a></li>
@@ -198,6 +200,11 @@
                   </tbody></table>
                 </fieldset>
             </form>
+            <p id="validateTips"></p>
+        </div>
+        <div id="dialog-import" class="dialog" title="导入" style="display:none;">
+            <p>请选择数据文件：</p>
+            <input type="file" id="datafile" />
             <p id="validateTips"></p>
         </div>
         <!-- sample code end -->
