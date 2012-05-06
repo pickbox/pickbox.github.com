@@ -18,16 +18,19 @@ $.fn.spin = function(opts) {
     return this;
 };
 (function() {
-    var TEST = false;
+    var TEST = true;
     var HOST = TEST ? "http://127.0.0.1" : "http://justlog.sinaapp.com";
     var URL_USER_INSERT = HOST + "/api/user/insert/";
     var URL_GET_TOKEN = HOST + "/api/user/get_token/";
+    var URL_LOGOUT = HOST + "/api/user/logout/";
     var URL_FAV_INSERT = HOST + "/api/http_address/insert/";
     var URL_FAV_LIST = HOST + "/api/http_address/list/";
+    var URL_FAV_UPDATE = HOST + "/api/http_address/update/";
 
     var TEST_DATA = '[{        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
     // var TEST_DATA = '[{        "title": "测试",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
     TEST_DATA = $.toJSON($.evalJSON(TEST_DATA));
+
     var KEY_USER_ID = "user_id";
     var USER_ID = $.jStorage.get(KEY_USER_ID) || "";
     var KEY_USER_NAME = "user_name";
@@ -241,11 +244,11 @@ $.fn.spin = function(opts) {
             account: name,
             password: password
         }).error(onError).success( function(ret) {
-            var jObj = $.evalJSON(ret);
-            if (!jObj || !jObj.data || jObj.err_code != 0)
-                return;
-            var token = jObj.data.token;
-            var uid = jObj.data.uid;
+            var objRet = $.evalJSON(ret);
+            if (!objRet || !objRet.data || objRet.err_code != 0)
+                return onSuccess(ret);
+            var token = objRet.data.token;
+            var uid = objRet.data.uid;
             log("token:" + token + ",uid:" + uid);
             $.jStorage.set(KEY_USER_ID, uid);
             $.jStorage.set(KEY_TOKEN, token);
@@ -255,6 +258,24 @@ $.fn.spin = function(opts) {
             USER_NAME = name;
             onSuccess(ret);
         });
+    }
+
+    function logout() {
+        var token = TOKEN;
+        clearUI();
+        $.jStorage.flush();
+        USER_ID = "";
+        USER_NAME = "";
+        FAVORITE_DATA = TEST_DATA;
+        TOKEN = "";
+        $.post(URL_LOGOUT, {
+            token: token
+        }).error( function(ret) {
+            log(ret);
+        }).success( function(ret) {
+            log(ret);
+        });
+        // location.reload();
     }
 
     function insertFavorite() {
@@ -271,45 +292,79 @@ $.fn.spin = function(opts) {
         });
     }
 
-    function clear() {
-        $("#nav_user_name").text("");
-    }
-
-    function fill() {
-        $("#nav_user_name").text(USER_NAME);
-        Favorite.load(FAVORITE_DATA);
-    }
-
     function checkLogin() {
         if (!USER_ID || !TOKEN) {
-            clear();
+            clearUI();
             return;
         }
+        fillUI();
         $.post(URL_FAV_LIST, {
             user: USER_ID,
             token: TOKEN
         }).error( function(ret) {
             log(ret);
-            clear();
+            clearUI();
         }).success( function(ret) {
             log(ret);
-            var jObj = $.evalJSON(ret);
-            if (!jObj || jObj.err_code != 0 || !jObj.data) {
-                clear();
+            var objRet = $.evalJSON(ret);
+            if (!objRet || objRet.err_code != 0 || !objRet.data) {
+                clearUI();
+                if (!objRet.data)
+                    insertFavorite();
                 return;
             }
-            var info = jObj.data.items[0];
+            var info = objRet.data.items[0];
             $.jStorage.set(KEY_FAVORITE_DATA, info.data);
             FAVORITE_DATA = info.data;
-            fill();
+            fillUI();
         });
+    }
+
+    function sync() {
+        var thiz = Favorite;
+        var arr = [];
+        $("#favorite").find(".block").each( function() {
+            var s = thiz.onExport($(this));
+            arr = arr.concat(s);
+        });
+        var json = "[" + arr.join(",") + "]";
+        $.post(URL_FAV_UPDATE, {
+            data: json,
+            user: USER_ID,
+            token: TOKEN
+        }).error( function(ret) {
+            log(ret);
+            alert("sync fail. " + ret);
+        }).success( function(ret) {
+            log(ret);
+            var objRet = $.evalJSON(ret);
+            if (!objRet || objRet.err_code != 0 || !objRet.data) {
+                alert("sync fail. " + ret);
+                return;
+            }
+            alert("sync success. ");
+        });
+    }
+
+    function clearUI() {
+        $("#nav_user_name").text("");
+        $("#nav_profile #guest").show();
+        $("#nav_profile #user").hide();
+        Favorite.load(TEST_DATA);
+    }
+
+    function fillUI() {
+        $("#nav_user_name").text(USER_NAME);
+        $("#nav_profile #guest").hide();
+        $("#nav_profile #user").show();
+        Favorite.load(FAVORITE_DATA);
     }
 
     var Favorite = {
         "jTemplateBlock": null,
+        "jTemplateBlockJson": '{"title": "新分组","list": [{"type": "新类别","items": [{"name": "新浪微博","link": "https://weibo.com/","prompt": "新浪微博"}]}]}',
         "init": function() {
             this.initUI();
-            checkLogin();
         },
         "initUI": function() {
             if (this.jTemplateBlock === null) {
@@ -329,7 +384,33 @@ $.fn.spin = function(opts) {
                 $(this).children("#menu_items").slideUp(150);
             });
             jFavoriteMenu.find("#menu_import").click( function() {
-                $.post("http://justlog.sinaapp.com/api/http_address/list/", {
+            });
+            jFavoriteMenu.find("#menu_export").click( function() {
+            });
+            var jNavItem = $("#nav_profile");
+            jNavItem.hover( function() {
+                $(this).children("#menu_items").slideDown(150);
+            }, function() {
+                $(this).children("#menu_items").slideUp(150);
+            });
+            jNavItem.find(".menu_item").click( function() {
+                jNavItem.children("#menu_items").slideUp(150);
+            });
+            jNavItem.find("#login").click( function() {
+                showDialog($("#dialog-login"));
+            });
+            jNavItem.find("#register").click( function() {
+                showDialog($("#dialog-register"));
+            });
+            jNavItem.find("#logout").click( function() {
+                logout();
+            });
+            jNavItem.find("#sync").click( function() {
+                sync();
+            });
+            // --- will delete
+            jNavItem.find("#orig_import").click( function() {
+                $.post(URL_FAV_LIST, {
                     user: USER_ID
                 }).error( function(ret) {
                     alert("import fail. " + ret);
@@ -344,33 +425,14 @@ $.fn.spin = function(opts) {
                     thiz.load(data);
                 });
             });
-            jFavoriteMenu.find("#menu_export").click( function() {
-                var arr = [];
-                $("#favorite").find(".block").each( function() {
-                    var s = thiz.onExport($(this));
-                    arr = arr.concat(s);
-                });
-                var json = "[" + arr.join(",") + "]";
-                $.post("http://justlog.sinaapp.com/api/http_address/update/", {
-                    data: json,
-                    user: USER_ID
-                }).error( function(ret) {
-                    alert("export fail. " + ret);
-                }).success( function(ret) {
-                    alert("export success. " + ret);
-                });
+            jNavItem.find("#import").click( function() {
             });
-            var jNavItem = $("#nav_profile");
-            jNavItem.hover( function() {
-                $(this).children("#menu_items").slideDown(150);
-            }, function() {
-                $(this).children("#menu_items").slideUp(150);
+            jNavItem.find("#export").click( function() {
             });
-            jNavItem.find("#login").click( function() {
-                showDialog($("#dialog-login"));
-            });
-            jNavItem.find("#register").click( function() {
-                showDialog($("#dialog-register"));
+            $("#add_block").click( function() {
+                var jBlock = thiz.getBlock(thiz.jTemplateBlock, $.evalJSON(thiz.jTemplateBlockJson));
+                thiz.initMenu(jBlock);
+                $("#favorite").append(jBlock);
             });
         },
         "load": function(json) {
@@ -761,25 +823,14 @@ $.fn.spin = function(opts) {
             placeHolder.remove();
         },
         "test": function() {
-            $("#add_block").click( function() {
-                $.post(URL_FAV_LIST, {
-                    user: USER_ID,
-                    token: TOKEN
-                }).error( function(ret) {
-                    alert(ret + "\n" + TOKEN);
-                    log(ret + "\n" + TOKEN);
-                }).success( function(ret) {
-                    alert(ret + "\n" + TOKEN);
-                    log(ret + "\n" + TOKEN);
-                });
-            });
         },
         "go": function() {
             this.init();
             this.load(FAVORITE_DATA);
+            checkLogin();
         }
     }
     window.Favorite = Favorite;
 })();
-Favorite.go();
-Favorite.test();
+window.Favorite.go();
+window.Favorite.test();

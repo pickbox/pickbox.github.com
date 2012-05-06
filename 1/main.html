@@ -57,15 +57,7 @@
   <div class="userbar">
     <div class="box">
       <div class="ft-l">
-        <li id="favorite_menu" class="menu">
-          <div class="menu_title">
-            <span class="nav-item"><a>收藏夹</a></span>
-          </div>
-          <ul id="menu_items" class="menu_items">
-            <li id="menu_import" class="menu_item"><a href="#" style="text-decoration: none;">导入</a></li>
-            <li id="menu_export" class="menu_item"><a href="#" style="text-decoration: none;">导出</a></li>
-          </ul>
-        </li>
+        <span class="logo">收藏夹</span>
       </div>
       <div class="ft-r">
       	<li id="nav_profile" class="menu">
@@ -73,8 +65,16 @@
           	<div class="nav-item"><div class="nav-icon"><em></em></div></div>
           </div>
           <ul id="menu_items" class="menu_items" style="right:0;">
+            <span id="guest">
             <li id="login" class="menu_item"><a href="#" style="text-decoration: none;">登录</a></li>
             <li id="register" class="menu_item"><a href="#" style="text-decoration: none;">注册</a></li>
+            </span>
+            <span id="user" style="display: none">
+            <li id="sync" class="menu_item"><a href="#" style="text-decoration: none;">同步到服务器</a></li>
+            <li id="import" class="menu_item divider"><a href="#" style="text-decoration: none;">导入</a></li>
+            <li id="export" class="menu_item"><a href="#" style="text-decoration: none;">导出</a></li>
+            <li id="logout" class="menu_item divider"><a href="#" style="text-decoration: none;">退出</a></li>
+            </span>
           </ul>
       	</li>
         <li class="user_name"><span id="nav_user_name"></span></li>
@@ -125,7 +125,6 @@
             </li>
           </ul>
         </div>
-        <button id="add_block">添加新组</button>
         
         <!-- sample code for item edit -->
         <li id="imenu" class="imenu">
@@ -206,6 +205,7 @@
     </div>
     
     <footer>
+        <button id="add_block">添加新组</button>
     </footer>
   </div> <!--! end of #container -->
 

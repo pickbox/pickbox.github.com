@@ -146,8 +146,8 @@ label, input[type=button], input[type=submit], button { cursor: pointer; }
 /* These selection declarations have to be separate.
    No text-shadow: twitter.com/miketaylr/status/12228805301 
    Also: hot pink. */
-::-moz-selection{ background: #FF5E99; color:#fff; text-shadow: none; }
-::selection { background:#FF5E99; color:#fff; text-shadow: none; } 
+::-moz-selection{ background: #6F6ED9; color:#fff; text-shadow: none; }
+::selection { background:#6F6ED9; color:#fff; text-shadow: none; } 
 
 /*  j.mp/webkit-tap-highlight-color */
 a:link { -webkit-tap-highlight-color: #FF5E99; } 
@@ -223,6 +223,13 @@ ul, ol, li {
 .ft-r {
     float: right;
 }
+.logo {
+    line-height: 27px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1.5em;
+    font-weight: bold;
+}
 .nav-item {
     line-height: 27px;
     text-align: center;
@@ -292,7 +299,7 @@ ul, ol, li {
     background: url(../images/round-top-center.gif) repeat-x;
 }
 .title {
-    font-weight: bold;
+    font-weight: normal;
     font-size: 1.4em;
 }
 .type {
@@ -350,6 +357,11 @@ ul, ol, li {
 .menu_title_indicator {
     background: url("../images/arrows-ffffff.png");
     background-position: 50px -100px;
+}
+.divider {
+    border-top-color: #D9E6FF;
+    border-top-style: solid;
+    border-top-width: 1px;
 }
 .ok {
     float: right;
