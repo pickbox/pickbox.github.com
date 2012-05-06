@@ -309,7 +309,7 @@ $.fn.spin = function(opts) {
             var objRet = $.evalJSON(ret);
             if (!objRet || objRet.err_code != 0 || !objRet.data) {
                 clearUI();
-                if (!objRet.data)
+                if (objRet.err_code == 0 && !objRet.data)
                     insertFavorite();
                 return;
             }
