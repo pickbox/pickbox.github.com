@@ -18,7 +18,7 @@ $.fn.spin = function(opts) {
     return this;
 };
 (function() {
-    var TEST = true;
+    var TEST = false;
     var HOST = TEST ? "http://127.0.0.1" : "http://justlog.sinaapp.com";
     var URL_USER_INSERT = HOST + "/api/user/insert/";
     var URL_GET_TOKEN = HOST + "/api/user/get_token/";
