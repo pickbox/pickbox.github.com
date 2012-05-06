@@ -40,6 +40,8 @@ $.fn.spin = function(opts) {
     var KEY_TOKEN = "token";
     var TOKEN = $.jStorage.get(KEY_TOKEN) || "";
 
+    var BlobBuilder = BlobBuilder || WebKitBlobBuilder || MozBlobBuilder;
+    var URL = URL || webkitURL || window;
     if (window.File && window.FileReader && window.FileList && window.Blob) {
         // Great success! All the File APIs are supported.
     } else {
