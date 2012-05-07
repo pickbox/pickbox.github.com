@@ -343,6 +343,7 @@ ul, ol, li {
 .menu_title, .menu_item {
     text-decoration: none;
     padding: 0 5px;
+	cursor: pointer;
 }
 .menu_title:hover, .menu_item:hover {
     background-color: #D9E6FF;
