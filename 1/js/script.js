@@ -665,7 +665,8 @@ $.fn.spin = function(opts){
                 this.unwrapIMenu(jBlock.find("#type"));
                 
                 jBlock.find("#type").each(function(){
-                    if ($(this).text() == "*") {
+					var t = $(this).text();
+                    if (!t || t == "*") {
                         $(this).hide();
                         $(this).siblings("#seperator").hide();
                     }
