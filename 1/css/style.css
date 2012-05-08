@@ -302,6 +302,47 @@ ul, ol, li {
     font-weight: normal;
     font-size: 1.4em;
 }
+.c_delete {
+    background: url(../images/menu_bg.png) no-repeat left top;
+    background-position: -0px -80px;
+    width: 18px;
+    height: 26px;
+    float: right;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+}
+.c_delete:hover {
+    background-position: -0px -63px;
+}
+.c_edit {
+    background: url(../images/menu_bg.png) no-repeat left top;
+    background-position: -22px -45px;
+    width: 48px;
+    height: 26px;
+    margin-top: 1px;
+    float: right;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 2px;
+    color: #CFCFCF;
+}
+.c_edit:hover {
+    background-position: -22px -25px;
+    color: #777;
+}
+.c_edit span {
+    text-decoration: none;
+    margin-left: 18px;
+}
+.c_back em {
+    background-color: #0000EE;
+    padding: 3px 6px 3px 6px;
+    color: #FFF;
+    border-radius: 4px;
+}
+
 .type {
     color: #108410;
     border-radius: 3px;
