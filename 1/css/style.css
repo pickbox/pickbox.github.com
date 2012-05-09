@@ -302,6 +302,9 @@ ul, ol, li {
     font-weight: normal;
     font-size: 1.4em;
 }
+.control {
+	display: inline;
+}
 .c_delete {
     background: url(../images/menu_bg.png) no-repeat left top;
     background-position: -0px -80px;
@@ -336,11 +339,21 @@ ul, ol, li {
     text-decoration: none;
     margin-left: 18px;
 }
-.c_back em {
-    background-color: #0000EE;
+.c_ok {
+    background-color: #4A82DA;
     padding: 3px 6px 3px 6px;
     color: #FFF;
     border-radius: 4px;
+	float: right;
+    cursor: pointer;
+	line-height: 14px;
+	margin-top: 3px;
+	margin-right: 18px;
+	font-size: 12px;
+}
+.c_ok:hover {
+    background-color: #3C62C4;
+	color: #FFF;
 }
 
 .type {

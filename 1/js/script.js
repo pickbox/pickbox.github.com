@@ -576,36 +576,51 @@ $.fn.spin = function(opts){
         },
         "initMenu": function(jBlock){
             var thiz = this;
-            jMenu = jBlock.find("#menu");
-            jMenu.hover(function(){
-                $(this).children("#menu_items").slideDown(150);
-            }, function(){
-                $(this).children("#menu_items").slideUp(150);
-            });
-            jMenu.find("#menu_delete").click(function(){
-                thiz.onDeleteMode(jBlock);
-                jBlock.find("#menu").hide();
-                jBlock.find("#ok").show();
-            });
-            jMenu.find("#menu_edit").click(function(){
+			var control = jBlock.find("#control");
+			control.hide();
+			jBlock.find("#c_ok").hide();
+			jBlock.hover(function(){
+	            if (jBlock.attr("data-mode") == "edit") 
+	                return;
+				control.show();
+			}, function(){
+	            if (jBlock.attr("data-mode") == "edit") 
+	                return;
+				control.hide();
+			});
+			control.find("#c_delete").click(function(){
+				jBlock.remove();
+			});
+            control.find("#c_edit").click(function(){
                 thiz.onEditMode(jBlock);
-                jBlock.find("#menu").hide();
-                jBlock.find("#ok").show();
+				control.hide();
+				jBlock.find("#c_ok").show();
             });
-            // jMenu.find("#menu_import").click(function(){
-            // thiz.onImport(jBlock);
-            // jBlock.find("#menu").hide();
-            // jBlock.find("#ok").show();
-            // });
-            // jMenu.find("#menu_export").click(function(){
-            // thiz.onExport(jBlock);
-            // jBlock.find("#menu").hide();
-            // jBlock.find("#ok").show();
-            // });
-            jBlock.find("#ok").hide();
-            jBlock.find("#ok").click(function(){
-                thiz.onNormalMode(jBlock);
-            });
+			jBlock.find("#c_ok").click(function(){
+				thiz.onNormalMode(jBlock);
+				$(this).hide();
+				control.show();
+			});
+//            jMenu = jBlock.find("#menu");
+//            jMenu.hover(function(){
+//                $(this).children("#menu_items").slideDown(150);
+//            }, function(){
+//                $(this).children("#menu_items").slideUp(150);
+//            });
+//            jMenu.find("#menu_delete").click(function(){
+//                thiz.onDeleteMode(jBlock);
+//                jBlock.find("#menu").hide();
+//                jBlock.find("#ok").show();
+//            });
+//            jMenu.find("#menu_edit").click(function(){
+//                thiz.onEditMode(jBlock);
+//                jBlock.find("#menu").hide();
+//                jBlock.find("#ok").show();
+//            });
+//            jBlock.find("#ok").hide();
+//            jBlock.find("#ok").click(function(){
+//                thiz.onNormalMode(jBlock);
+//            });
         },
         "onDeleteMode": function(jBlock){
             if (jBlock.attr("data-mode") == "delete") 
