@@ -1,0 +1,70 @@
+.item_box {
+    float: left;
+    height: 25px;
+    border: 1px dotted #BBB;
+    white-space: nowrap;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-width: 180px;
+}
+
+.pillar {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0px;
+    height: 100%;
+}
+
+.div_vertical_center {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.item_link {
+    display: inline-block;
+    cursor: pointer;
+    border: 1px dotted #BBB;
+}
+
+.item_link img {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+.item_link em {
+    font-style: normal;
+    padding-left: 2px;
+    vertical-align: middle;
+}
+
+.item_control_group {
+    display: inline-block;
+    vertical-align: middle;
+    float: left;
+    border: 1px dotted #BBB;
+}
+
+.item_control {
+    background: url(../images/menu_bg.png) no-repeat left top;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.control_delete {
+    background-position: -66px -70px;
+}
+
+.control_delete:hover {
+    background-position: -66px -88px;
+}
+
+.control_edit {
+    background-position: -48px -70px;
+}
+
+.control_edit:hover {
+    background-position: -48px -88px;
+}
