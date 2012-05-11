@@ -304,6 +304,7 @@ ul, ol, li {
 }
 .control {
 	display: inline;
+	float: right;
 }
 .c_delete {
     background: url(../images/menu_bg.png) no-repeat left top;
@@ -339,7 +340,7 @@ ul, ol, li {
     text-decoration: none;
     margin-left: 18px;
 }
-.c_ok {
+.c_btn {
     background-color: #4A82DA;
     padding: 3px 6px 3px 6px;
     color: #FFF;
@@ -351,10 +352,30 @@ ul, ol, li {
 	margin-right: 18px;
 	font-size: 12px;
 }
-.c_ok:hover {
+.c_btn:hover {
     background-color: #3C62C4;
 	color: #FFF;
 }
+
+.i_delete {
+    background: url(../images/menu_bg.png) no-repeat left top;
+    background-position: -66px -71px;
+    width: 15px;
+    height: 15px;
+    margin-top: 1px;
+    float: right;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 2px;
+    color: #CFCFCF;
+
+}
+.i_delete:hover {
+    background-position: -66px -89px;
+    color: #777;
+}
+
 
 .type {
     color: #108410;
