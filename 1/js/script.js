@@ -552,11 +552,10 @@ $.fn.spin = function(opts){
                     var jItem2link = jItem2.find("#a");
                     jItem2link.attr("href", link);
                     jItem2link.attr("title", prompt);
-                    jItem2link.find("#item_name").text(name);
+                    jItem2link.text(name);
                     jListItem2.append(jItem2);
                     this.attachDragAndDrop(jItem2, jBlock);
                 };
-                jListItem2.append(jListItem2.find("#item_add"));
                 jListItem2.droppable({
                     drop: handleItemDropEvent
                 });
@@ -723,7 +722,7 @@ $.fn.spin = function(opts){
             var thiz = this;
             var jItem = jElem.find("#item");
             var jLink = jItem.find("#a");
-            var name = jLink.find("#item_name").text();
+            var name = jLink.text();
             var link = jLink.attr("data-href");
             var prompt = jLink.attr("title");
             
@@ -737,7 +736,7 @@ $.fn.spin = function(opts){
             btnCancel.unbind();
             btnOk.click(function(){
                 var jThisLink = jElem.find("#a");
-                jThisLink.find("#item_name").text(jElem.find("#imenu_item_name").val());
+                jThisLink.text(jElem.find("#imenu_item_name").val());
                 jThisLink.attr("data-href", jElem.find("#imenu_item_link").val());
                 jThisLink.attr("title", jElem.find("#imenu_item_prompt").val());
                 jElem.find("#imenu_items").slideUp(150);
@@ -758,7 +757,7 @@ $.fn.spin = function(opts){
                 
                 var jNewLink = jNewElem.find("#a");
                 thiz.inactivateLink(jNewLink);
-                jNewLink.find("#item_name").text(jElem.find("#imenu_item_name").val());
+                jNewLink.text(jElem.find("#imenu_item_name").val());
                 jNewLink.attr("data-href", jElem.find("#imenu_item_link").val());
                 jNewLink.attr("title", jElem.find("#imenu_item_prompt").val());
                 
@@ -855,7 +854,7 @@ $.fn.spin = function(opts){
                 $(this).find("#item").each(function(){
                     var item = {};
                     var jLink = $(this).find("#a");
-                    item.name = jLink.find("#item_name").text();
+                    item.name = jLink.text();
                     item.link = jLink.attr("href");
                     item.prompt = jLink.attr("title");
                     items.push(item);
