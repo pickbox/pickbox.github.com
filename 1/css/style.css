@@ -462,6 +462,7 @@ ul, ol, li {
     padding: 5px 5px;
     font-size: 13px;
     font-weight: normal;
+    left: 0px;
 }
 .imenu_close {
     float: right;

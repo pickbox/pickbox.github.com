@@ -30,6 +30,7 @@
 
   <!-- CSS : implied media="all" -->
   <link rel="stylesheet" href="css/style.css?v=1">
+  <link rel="stylesheet" href="css/style_good.css?v=1">
 
   <!-- For the less-enabled mobile browsers like Opera Mini -->
   <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1">
@@ -46,6 +47,7 @@
   <script src="js/FileSaver.min.js"></script>
   <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 
+</style>
 </head>
 
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
@@ -108,7 +110,7 @@
             </li>
             <button id="ok" class="ok">完成</button> -->
           </div>
-          <ul id="list">
+          <!--ul id="list">
             <li id="list_item" class="list_item even">
               <tr>
               <td>
@@ -117,7 +119,7 @@
               </td>
               <td>
               <span id="item" class="item">
-                <a id="a" href="#" title="谷歌资讯" target="_blank">谷歌资讯</a>
+                <a id="a" href="#" title="谷歌资讯" target="_blank"><em id="item_name">谷歌资讯</em></a>
               </span>
               <span id="item_add" class="item_add">
                 <i>添加</i>
@@ -128,9 +130,42 @@
             <li id="list_item_add" class="list_item">
               <span id="list_item_add_item"><i>添加新类别</i></span>
             </li>
-          </ul>
+          </ul-->
+<span id="list" class="list">
+  <span id="list_item" class="list_row even">
+    <span class="column_type">
+      <span class="item_box item_box_type">
+        <span id="type">类别</span><span class="pillar"></span>
+      </span>
+    </span>
+    <span id="seperator" class="column_seperator">
+      <span class="item_box">
+        <span id="seperator">|</span><span class="pillar"></span>
+      </span>
+    </span>
+    <span class="column_items">
+      <span id="item" class="item_box">
+        <a id="a" class="item_link" href="" title="">
+          <img src="http://www.baidu.com/favicon.ico" onerror='javascript:this.src="http://2.su.bdimg.com/icon/1.png"'/><em id="item_name">斗破苍穹</em>
+        </a>
+        <span class="item_control control_edit"></span><span class="item_control control_delete"></span>
+        <span class="pillar"></span>
+      </span>
+      <span id="item_add" class="item_box item_add">
+        <span class="item_control control_add"></span><span class="control_add_text">添加</span>
+        <span class="pillar"></span>
+      </span>
+    </span>
+    <span class="pillar"></span>
+    <div style="clear:both;"></div>
+  </span>
+  <span id="list_item_add" class="list_row">
+    <span id="list_item_add_item"><i>添加新类别</i></span>
+  </span>
+</span>
+
         </div>
-        
+
         <!-- sample code for item edit -->
         <li id="imenu" class="imenu">
           <div id="imenu_title" class="imenu_title"></div>
