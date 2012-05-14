@@ -25,6 +25,7 @@ $.fn.spin = function(opts){
     var URL_FAV_INSERT = HOST + "/api/http_address/insert/";
     var URL_FAV_LIST = HOST + "/api/http_address/list/";
     var URL_FAV_UPDATE = HOST + "/api/http_address/update/";
+    var DEF_FAV_ICON = "http://2.su.bdimg.com/icon/1.png";
     
     var TEST_DATA = '[{        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
     // var TEST_DATA = '[{        "title": "测试",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
@@ -549,11 +550,17 @@ $.fn.spin = function(opts){
                         name = link;
                     if (!prompt) 
                         prompt = name;
+                    var favicon = this.getHost(link);
+                    if (favicon)
+                        favicon += "/favicon.ico";
+                    else
+                        favicon = DEF_FAV_ICON;
                     var jItem2 = jItem.clone();
                     var jItem2link = jItem2.find("#a");
                     jItem2link.attr("href", link);
                     jItem2link.attr("title", prompt);
                     jItem2link.find("#item_name").text(name);
+                    jItem2link.find("img").attr("src", favicon);
                     jItemAdd.before(jItem2);
                     this.attachDragAndDrop(jItem2, jBlock);
                 };
@@ -679,7 +686,7 @@ $.fn.spin = function(opts){
                 this.unwrapIMenu(jBlock.find("#item"));
                 this.unwrapIMenu(jBlock.find("#item_add"));
                 jBlock.find("#item_add").hide();
-                this.unwrapIMenu(jBlock.find("#type"));
+                this.unwrapIMenu(jBlock.find("#item_box_type"));
                 
                 jBlock.find("#type").each(function(){
 					var t = $(this).text();
@@ -923,12 +930,27 @@ $.fn.spin = function(opts){
             placeHolder.after(jItem2);
             placeHolder.remove();
         },
-        "test": function(){
-        },
         "go": function(){
             this.init();
             this.load(FAVORITE_DATA);
             checkLogin();
+        },
+        "getHost": function(link){
+            if (/file:\/\//gi.test(link))
+                return "";
+            if (/javascript:/gi.test(link))
+                return "";
+            var regExp = /https?:\/\/[^\/]+/gi;
+            var obj = regExp.exec(link);
+            if (obj)
+                return obj.toString();
+            regExp = /[^\/]+/gi;
+            obj = regExp.exec(link);
+            if (obj)
+                return obj.toString();
+            return "";
+        },
+        "test": function(){
         }
     }
     window.Favorite = Favorite;
