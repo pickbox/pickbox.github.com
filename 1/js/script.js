@@ -557,7 +557,7 @@ $.fn.spin = function(opts){
                     jItemAdd.before(jItem2);
                     this.attachDragAndDrop(jItem2, jBlock);
                 };
-                jListItem2.append(jListItem2.find("#item_add"));
+                jItemAdd.parent().append(jItemAdd);
                 jListItem2.droppable({
                     drop: handleItemDropEvent
                 });
@@ -653,7 +653,7 @@ $.fn.spin = function(opts){
             
             jBlock.find("#type").show();
             jBlock.find("#seperator").show();
-            this.wrapIMenu(jBlock.find("#type"));
+            this.wrapIMenu(jBlock.find("#item_box_type"));
             
             var jListItemAdd = jBlock.find("#list_item_add");
             jListItemAdd.show();
@@ -763,7 +763,7 @@ $.fn.spin = function(opts){
                 jNewLink.attr("data-href", jElem.find("#imenu_item_link").val());
                 jNewLink.attr("title", jElem.find("#imenu_item_prompt").val());
                 
-                jElem.after(jNewElem);
+                jElem.before(jNewElem);
                 jElem.find("#imenu_items").slideUp(150);
             });
             btnCancel.click(function(){
@@ -897,7 +897,7 @@ $.fn.spin = function(opts){
             jLink.each(function(){
                 var href = $(this).attr("href");
                 $(this).attr("data-href", href);
-                $(this).attr("href", "#");
+                $(this).attr("href", "javascript:");
             });
         },
         "activateLink": function(jLink){
