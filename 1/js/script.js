@@ -714,11 +714,13 @@ $.fn.spin = function(opts) {
                 jBlock.find("#item_add").hide();
                 this.unwrapIMenu(jBlock.find("#item_box_type"));
 
-                jBlock.find("#type").each( function() {
-                    var t = $(this).text();
-                    if (!t || t == TYPE_DEFAULT_SYMBOL) {
-                        $(this).hide();
-                        $(this).siblings("#seperator").hide();
+                jBlock.find("#list_item").each(function(){
+                    var jListItem = $(this);
+                    var jType = jListItem.find("#type");
+                    var jSeperator = jListItem.find("#seperator");
+                    if (!jType.text() || jType.text() == TYPE_DEFAULT_SYMBOL) {
+                        jType.hide();
+                        jSeperator.hide();
                     }
                 });
                 jItem.unbind();
