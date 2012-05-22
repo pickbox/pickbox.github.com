@@ -29,11 +29,11 @@
 
 
   <!-- CSS : implied media="all" -->
-  <link rel="stylesheet" href="css/style.css?v=1">
-  <link rel="stylesheet" href="css/style_good.css?v=1">
+  <link rel="stylesheet" href="css/style.css?v=1" type="text/css">
+  <link rel="stylesheet" href="css/style_good.css?v=1" type="text/css">
 
   <!-- For the less-enabled mobile browsers like Opera Mini -->
-  <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1">
+  <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1" type="text/css">
 
  
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
@@ -47,7 +47,12 @@
   <script src="js/BlobBuilder.min.js"></script>
   <script src="js/FileSaver.min.js"></script>
 
+<style>
+  .item_box {
+    /*border: 1px dotted #BBB;*/
+  }
 </style>
+
 </head>
 
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
@@ -148,7 +153,7 @@
         <a id="a" class="item_link" href="" title="" target="_blank">
           <img src="http://jojo.aliapp.com/favicon.ico" onerror='javascript:this.src="http://2.su.bdimg.com/icon/1.png"'/><em id="item_name" class="item_name">斗破苍穹</em>
         </a>
-        <span class="item_control control_edit"></span><span class="item_control control_delete"></span>
+        <span id="control_edit" class="item_control control_edit"></span><span id="control_delete" class="item_control control_delete"></span>
         <span class="pillar"></span>
       </span>
       <span id="item_add" class="item_box item_add">

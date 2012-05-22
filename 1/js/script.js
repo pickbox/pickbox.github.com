@@ -27,6 +27,7 @@ $.fn.spin = function(opts){
     var URL_FAV_UPDATE = HOST + "/api/http_address/update/";
     var DEF_FAV_ICON = "http://2.su.bdimg.com/icon/1.png";
     var LOAD_ICON = false;
+    var TYPE_DEFAULT_SYMBOL = "•";
     
     var TEST_DATA = '[{        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
     // var TEST_DATA = '[{        "title": "测试",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    },                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "http://mail.google.com/": ""                    }                ]            },            {                "type": "",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "SNS",                "items": [                    {                        "name": "微博",                        "link": "http://t.sina.com.cn/jfojfo",                        "prompt": ""                    },                    {                        "name": "校内",                        "link": "http://home.xiaonei.com/Home.do?id=245505180",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "Google新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    }                ]            }        ]    }]';
@@ -535,7 +536,7 @@ $.fn.spin = function(opts){
                     jListItem2.find("#type").text(type);
                 }
                 else {
-                    jListItem2.find("#type").text("*");
+                    jListItem2.find("#type").text(TYPE_DEFAULT_SYMBOL);
                     jListItem2.find("#seperator").hide();
                     jListItem2.find("#type").hide();
                 }
@@ -564,6 +565,8 @@ $.fn.spin = function(opts){
                     jItem2link.attr("title", prompt);
                     jItem2link.find("#item_name").text(name);
                     jItem2link.find("img").attr("src", favicon);
+					jItem2.find("#control_edit").hide();
+					jItem2.find("#control_delete").hide();
                     jItemAdd.before(jItem2);
                     this.attachDragAndDrop(jItem2, jBlock);
                 };
@@ -648,14 +651,19 @@ $.fn.spin = function(opts){
             this.inactivateLink(jLink);
         },
         "onEditMode": function(jBlock){
+			var thiz = this;
+			
             if (jBlock.attr("data-mode") == "edit") 
                 return;
             jBlock.attr("data-mode", "edit");
             
             var jItem = jBlock.find("#item");
+			jItem.css("border", "1px dotted #BBB");
+            jItem.find("#control_edit").show();
+            jItem.find("#control_delete").show();
             var jLink = jItem.find("#a");
             this.inactivateLink(jLink);
-            
+
             this.wrapIMenu(jItem);
             var jItemAdd = jBlock.find("#item_add");
             jItemAdd.show();
@@ -669,6 +677,20 @@ $.fn.spin = function(opts){
             jListItemAdd.show();
             this.wrapIMenu(jListItemAdd.find("#list_item_add_item"));
             this.wrapIMenu(jBlock.find("#title"));
+			
+			jItem.each(function(){
+				var item = $(this);
+                var jElem = item.parents("#imenu");
+                item.find("#control_edit").unbind();
+                item.find("#control_edit").click(function(){
+                    jElem.children("#imenu_items").slideDown(150);
+                    thiz.onEdit(jElem);
+                });
+                item.find("#control_delete").unbind();
+                item.find("#control_delete").click(function(){
+					thiz.onDelete(jBlock, item);
+                });
+			});
         },
         "onNormalMode": function(jBlock){
             var mode = jBlock.attr("data-mode");
@@ -693,7 +715,7 @@ $.fn.spin = function(opts){
                 
                 jBlock.find("#type").each(function(){
 					var t = $(this).text();
-                    if (!t || t == "*") {
+                    if (!t || t == TYPE_DEFAULT_SYMBOL) {
                         $(this).hide();
                         $(this).siblings("#seperator").hide();
                     }
@@ -703,12 +725,15 @@ $.fn.spin = function(opts){
                 jBlock.find("#list_item_add").hide();
                 this.unwrapIMenu(jBlock.find("#list_item_add_item"));
                 this.unwrapIMenu(jBlock.find("#title"));
+				
+                jItem.find("#control_edit").hide();
+                jItem.find("#control_delete").hide();
             }
         },
-        "onDelete": function(jBlock, jElem){
-            if (jElem.attr("id") == "item") {
-                var jParentListItem = jElem.parent();
-                jElem.remove();
+        "onDelete": function(jBlock, jItem){
+            if (jItem.attr("id") == "item") {
+                var jParentListItem = jItem.parent();
+                jItem.remove();
                 if (jParentListItem.find("#item").length == 0) {
                     jParentListItem.remove();
                     jBlock.find("#list #list_item").removeClass("even");
@@ -859,7 +884,7 @@ $.fn.spin = function(opts){
             jBlock.find("#list_item").each(function(){
                 var list_item = {};
                 var type = "";
-                if ($(this).find("#type").is(":visible")) 
+                if ($(this).find("#type").is(":visible") && $(this).find("#type").text() != TYPE_DEFAULT_SYMBOL) 
                     type = $(this).find("#type").text();
                 list_item.type = type;
                 var items = [];
@@ -890,12 +915,15 @@ $.fn.spin = function(opts){
                 item.remove();
                 menu_title.wrapInner(item);
             });
-            parent.hover(function(){
-                $(this).children("#imenu_items").slideDown(150);
-                thiz.onEdit($(this));
-            }, function(){
-                $(this).children("#imenu_items").slideUp(150);
-            });
+			if (jItem.attr("id") == "item") {
+			} else {
+                parent.hover(function(){
+                    $(this).children("#imenu_items").slideDown(150);
+                    thiz.onEdit($(this));
+                }, function(){
+                    $(this).children("#imenu_items").slideUp(150);
+                });
+			}
             return parent;
         },
         "unwrapIMenu": function(jItem){
