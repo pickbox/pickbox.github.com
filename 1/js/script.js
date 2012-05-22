@@ -432,6 +432,7 @@ $.fn.spin = function(opts){
     var Favorite = {
         "jTemplateBlock": null,
         "jTemplateBlockJson": '{"title": "新分组","list": [{"type": "新类别","items": [{"name": "新浪微博","link": "https://weibo.com/","prompt": "新浪微博"}]}]}',
+        "lastItemEdited": null,
         "init": function(){
             this.initUI();
         },
@@ -683,11 +684,16 @@ $.fn.spin = function(opts){
                 var jElem = item.parents("#imenu");
                 item.find("#control_edit").unbind();
                 item.find("#control_edit").click(function(){
+                    if (thiz.lastItemEdited != null)
+                        thiz.lastItemEdited.children("#imenu_items").slideUp(150);
                     jElem.children("#imenu_items").slideDown(150);
+                    thiz.lastItemEdited = jElem;
                     thiz.onEdit(jElem);
                 });
                 item.find("#control_delete").unbind();
                 item.find("#control_delete").click(function(){
+                    if (thiz.lastItemEdited != null)
+                        thiz.lastItemEdited.children("#imenu_items").slideUp(150);
 					thiz.onDelete(jBlock, item);
                 });
 			});
