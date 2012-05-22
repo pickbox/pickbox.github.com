@@ -658,7 +658,7 @@ $.fn.spin = function(opts){
             jBlock.attr("data-mode", "edit");
             
             var jItem = jBlock.find("#item");
-			jItem.css("border", "1px dotted #BBB");
+            jItem.addClass("dotted_border");
             jItem.find("#control_edit").show();
             jItem.find("#control_delete").show();
             var jLink = jItem.find("#a");
@@ -699,6 +699,7 @@ $.fn.spin = function(opts){
             jBlock.find("#ok").hide();
             jBlock.find("#menu").show();
             var jItem = jBlock.find("#item");
+            jItem.removeClass("dotted_border");
             
             var jLink = jItem.find("#a");
             this.activateLink(jLink);

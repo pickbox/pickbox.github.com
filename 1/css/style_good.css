@@ -120,3 +120,7 @@
 }
 .item_box_seperator {
 }
+
+.dotted_border {
+    border: 1px dotted #BBB;
+}
