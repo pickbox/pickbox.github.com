@@ -69,7 +69,8 @@ $.fn.spin = function(opts){
             draggable.attr("style", "position:relative;");
         }
         else if (id === 'list_item') {
-            droppable.append(draggable);
+            // droppable.append(draggable);
+            droppable.find("#item_add").before(draggable);
         }
     }
     
