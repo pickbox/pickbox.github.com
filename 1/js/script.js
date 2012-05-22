@@ -505,7 +505,7 @@ $.fn.spin = function(opts) {
             });
         },
         "load": function(json) {
-            var jBlock = $("#favorite div.block");
+            var jBlock = $("#favorite #block");
             jBlock.remove();
             if (typeof json === "string")
                 json = $.evalJSON(json);
@@ -514,6 +514,9 @@ $.fn.spin = function(opts) {
                 this.initMenu(block);
                 $("#favorite").append(block);
             };
+            $("#favorite").sortable({
+                items: '#block',
+            });
         },
         "getBlock": function(jTemplate, json) {
             var list = json.list;
