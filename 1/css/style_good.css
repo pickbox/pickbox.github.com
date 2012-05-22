@@ -3,7 +3,7 @@
     height: 25px;
     word-wrap: break-word;
     overflow: hidden;
-    max-width: 180px;
+    max-width: 330px;
 }
 
 .pillar {
@@ -26,7 +26,7 @@
     text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-    max-width: 140px;
+    max-width: 290px;
 }
 
 .item_link img {
