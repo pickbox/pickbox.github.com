@@ -208,13 +208,13 @@ ul, ol, li {
 .userbar {
     height: 27px;
     font-size: 12px;
-    min-width: 960px;
+    min-width: 80%;
     color: #666;
     background: #F7F7F7 url(http://s1.hao123img.com/index/images/main1.png) repeat-x 0 0;
     border-bottom: 1px solid #E8E8E9;
 }
 .box {
-    width: 960px;
+    width: 80%;
     margin: 0 auto;
 }
 .ft-l {

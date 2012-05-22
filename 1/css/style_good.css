@@ -23,6 +23,11 @@
     display: inline-block;
     cursor: pointer;
     text-decoration: none;
+	
+    text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+    max-width: 70%;
 }
 
 .item_link img {
@@ -97,7 +102,7 @@
     float: left;
     text-align: center;
     vertical-align: top;
-    background-color: #00CC00;
+/*    background-color: #00CC00;*/
 }
 .column_seperator {
     display: block;
@@ -105,14 +110,14 @@
     width: 0px;
     text-align: center;
     vertical-align: top;
-    background-color: #EBEBEB;
+/*    background-color: #EBEBEB;*/
 }
 .column_items {
     display: block;
     vertical-align: middle;
 }
 .item_box_type {
-    width: 60px;
+/*    width: 60px;*/
 }
 .item_box_seperator {
 }
