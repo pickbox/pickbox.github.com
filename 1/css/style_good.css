@@ -101,15 +101,14 @@
     float: left;
     text-align: center;
     vertical-align: top;
-/*    background-color: #00CC00;*/
 }
 .column_seperator {
     display: block;
     float: left;
-    width: 0px;
     text-align: center;
     vertical-align: top;
-/*    background-color: #EBEBEB;*/
+    margin-left: 2px;
+    margin-right: 2px;
 }
 .column_items {
     display: block;
