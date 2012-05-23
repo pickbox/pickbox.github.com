@@ -491,7 +491,7 @@ $.fn.spin = function(opts) {
                         alert("抱歉，导出失败，请重试...");
                     }
                     var data = objRet.data.items[0].data;
-                    var json = $.toJSON(data);
+                    var json = data;
                     log(json);
                     var bb = new BlobBuilder;
                     bb.append(json);
