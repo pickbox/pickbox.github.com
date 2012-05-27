@@ -754,7 +754,7 @@ $.fn.spin = function(opts) {
                 this.onEditItem(jElem);
             else if (id === "item_add")
                 this.onEditItemAdd(jElem);
-            else if (id === "type")
+            else if (id === "item_box_type")
                 this.onEditItemType(jElem);
             else if (id === "list_item_add_item")
                 this.onEditListItemAdd(jElem);
