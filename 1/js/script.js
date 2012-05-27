@@ -845,7 +845,7 @@ $.fn.spin = function(opts) {
                     var jListItem2 = thiz.jTemplateBlock.find("#list_item").clone();
                     jListItem2.find("#item").remove();
                     jListItem2.find("#type").text(itemType);
-                    thiz.wrapIMenu(jListItem2.find("#type"));
+                    thiz.wrapIMenu(jListItem2.find("#item_box_type"));
                     thiz.wrapIMenu(jListItem2.find("#item_add"));
                     jElem.parent().before(jListItem2);
 
