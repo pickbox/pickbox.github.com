@@ -589,6 +589,11 @@ $.fn.spin = function(opts) {
             var listItemAdd = jBlock.find("#list_item_add");
             jBlock.find("#list").append(listItemAdd);
             listItemAdd.hide();
+            if (list.length > 10) {
+                var listItemAdd2 = listItemAdd.clone();
+                jBlock.find("#list").prepend(listItemAdd2);
+                listItemAdd2.hide();
+            }
             jBlock.find("#list").sortable({
                 items: '#list_item',
                 update: function() {
@@ -738,7 +743,13 @@ $.fn.spin = function(opts) {
                 });
                 jItem.unbind();
                 this.attachDragAndDrop(jItem, jBlock);
-                jBlock.find("#list_item_add").hide();
+                var jListItemAdd = jBlock.find("#list_item_add");
+                jListItemAdd.hide();
+                if (jListItemAdd.length == 2) {
+                    var jList = jBlock.find("#list");
+                    jList.prepend(jListItemAdd[0]);
+                    jList.append(jListItemAdd[1]);
+                }
                 this.unwrapIMenu(jBlock.find("#list_item_add_item"));
                 this.unwrapIMenu(jBlock.find("#title"));
 
