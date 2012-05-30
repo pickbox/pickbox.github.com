@@ -177,6 +177,11 @@ $.fn.spin = function(opts) {
                 allFields.val("").removeClass("ui-state-error");
             }
         });
+        $("#dialog-register").keyup(function(e){
+            if (e.keyCode == $.ui.keyCode.ENTER) {
+                $(this).parent().find('button:first').click();
+            }
+        });
 
         $("#dialog-login").dialog({
             autoOpen: false,
@@ -220,6 +225,11 @@ $.fn.spin = function(opts) {
                 "取消": function() {
                     $(this).dialog("close");
                 }
+            }
+        });
+        $("#dialog-login").keyup(function(e){
+            if (e.keyCode == $.ui.keyCode.ENTER) {
+                $(this).parent().find('button:first').click();
             }
         });
 
