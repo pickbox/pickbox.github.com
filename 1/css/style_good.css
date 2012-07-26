@@ -96,6 +96,9 @@
 /*    overflow:hidden;*/
 /*    zoom: 1;*/
 }
+.list_row:hover {
+	cursor: move;
+}
 .column_type {
     display: block;
     float: left;
