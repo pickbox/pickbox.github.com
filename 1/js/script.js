@@ -982,7 +982,8 @@ $.fn.spin = function(opts) {
                 revert: true
             });
             jItem.droppable({
-                drop: handleItemDropEvent
+                drop: handleItemDropEvent,
+                greedy: true
             });
         },
         "swapItem": function(jItem1, jItem2) {
