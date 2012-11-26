@@ -249,6 +249,10 @@ $.fn.spin = function(opts) {
                     var reader = new FileReader();
                     reader.onload = function() {
                         var json = this.result;
+                        $.jStorage.set(KEY_FAVORITE_DATA, json);
+                        FAVORITE_DATA = json;
+                        fillUI();
+
                         $.post(URL_FAV_UPDATE, {
                             data: json,
                             user: USER_ID,
@@ -1008,10 +1012,43 @@ $.fn.spin = function(opts) {
                 return obj.toString();
             return "";
         },
+        "goOffline": function() {
+            // for offline use
+            var thiz = this;
+            this.init();
+            this.load(FAVORITE_DATA);
+            fillUI();
+            var jNavItem = $("#nav_profile");
+            jNavItem.find("#logout").unbind();
+            jNavItem.find("#sync").unbind();
+            jNavItem.find("#import").unbind();
+            jNavItem.find("#export").unbind();
+            jNavItem.find("#logout").click( function() {
+                alert("Not supported in offline mode.");
+            });
+            jNavItem.find("#sync").click( function() {
+                alert("Not supported in offline mode.");
+            });
+            jNavItem.find("#import").click( function() {
+                showDialog($("#dialog-import"));
+            });
+            jNavItem.find("#export").click( function() {
+                var arr = [];
+                $("#favorite").find(".block").each( function() {
+                    var s = thiz.onExport($(this));
+                    arr = arr.concat(s);
+                });
+                var json = "[" + arr.join(",") + "]";
+                log(json);
+                var bb = new BlobBuilder;
+                bb.append(json);
+                saveAs(bb.getBlob("text/plain;charset=utf-8"), "favorite.json");
+            });
+        },
         "test": function() {
         }
     }
     window.Favorite = Favorite;
 })();
-window.Favorite.go();
+window.Favorite.goOffline();
 window.Favorite.test();
