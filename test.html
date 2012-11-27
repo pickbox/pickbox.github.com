@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <!-- CSS : implied media="all" -->
+  <link rel="stylesheet" href="css/style.css?v=1">
+  <link rel="stylesheet" href="css/style_good.css?v=1">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+  <script src="js/spin.min.js"></script>
+  <script src="js/jquery.md5.js"></script>
+  <script src="js/BlobBuilder.min.js"></script>
+  <script src="js/FileSaver.min.js"></script>
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="js/jquery.json-2.3.min.js"></script>
+  <script type="text/javascript" src="js/jstorage.js"></script>
+  <script type="text/javascript" src="js/util.js"></script>
+  <script src="js/plugins.js?v=1"></script>
+  <script src="js/script.js?v=1"></script>
+  <style>
+  .item_box {
+      height: 30px;
+  }
+  
+  .item_control {
+      border: 1px dotted #BBB;
+  }
+  
+  .item_control_group {
+      border: 1px dotted #BBB;
+  }
+  
+  .list_wrapper {
+      /* float: left; */
+  }
+  
+  .list {
+  }
+  
+  .list_row {
+      border: 1px solid #F00;
+  }
+  
+  .column_type {
+      border: 1px dotted #BBB;
+  }
+  
+  .column_seperator {
+      border: 1px dotted #BBB;
+  }
+  
+  .column_items {
+  }
+  
+  .clear_float {
+  }
+    
+  </style>
+</head>
+<body>
+
+<div class="list_wrapper">
+<span id="list" class="list">
+  <span id="list_item" class="list_row even">
+    <span class="column_type">
+      <span class="item_box item_box_type">
+        <span id="type">类别</span><span class="pillar"></span>
+      </span>
+    </span>
+    <span id="seperator" class="column_seperator">
+      <span class="item_box">
+        <span id="seperator">|</span><span class="pillar"></span>
+      </span>
+    </span>
+    <span class="column_items">
+      <span id="item" class="item_box">
+        <a id="a" class="item_link" href="" title="">
+          <img src="http://www.baidu.com/favicon.ico" onerror='javascript:this.src="http://2.su.bdimg.com/icon/1.png"'/><em id="item_name">斗破苍穹</em>
+        </a>
+        <span class="item_control control_edit"></span><span class="item_control control_delete"></span>
+        <span class="pillar"></span>
+      </span>
+      <span id="item_add" class="item_box item_add">
+        <span class="item_control control_add"></span><span class="control_add_text">添加</span>
+        <span class="pillar"></span>
+      </span>
+    </span>
+    <span class="pillar"></span>
+  </span>
+  <span id="list_item_add" class="list_row">
+    <span id="list_item_add_item"><i>添加新类别</i></span>
+  </span>
+</span>
+</div>
+
+<div><br/><br/></div>
+
+<div class="list_wrapper">
+<table class="list">
+  <tr class="list_row even">
+    <td class="list_column">
+      <span class="item_box">
+        <span>ok</span>
+        <span class="pillar"></span>
+      </span>
+    </td>
+    <td class="list_column even">
+      <span class="item_box">
+        <span>|</span>
+        <span class="pillar"></span>
+      </span>
+    </td>
+    <td class="list_column even">
+      <span class="item_box">
+        <span class="item_link">
+          <img src="http://www.baidu.com/favicon.ico" onerror='javascript:this.src="http://2.su.bdimg.com/icon/1.png"'/><em>斗破苍穹</em>
+        </span>
+        <span class="item_control control_edit"></span>
+        <span class="item_control control_delete"></span>
+        <span class="pillar"></span>
+      </span>
+      <span class="item_box">
+        <span class="item_link">
+          <img src="http://www.baidu.com/favicon.ico" onerror='javascript:this.src="http://2.su.bdimg.com/icon/1.png"'/><em>斗破苍穹</em>
+        </span>
+        <span class="item_control control_edit"></span>
+        <span class="item_control control_delete"></span>
+        <span class="pillar"></span>
+      </span>
+      <span class="item_box">
+        <span class="item_control control_add"></span>
+        <span class="pillar"></span>
+      </span>
+    </td>
+  </tr>
+</table>
+</div>
+
+<div><br/><br/></div>
+
+<div class="item_box">
+  <span class="item_link">
+    <img src="http://www.baidu.com/favicon.ico" onerror='javascript:this.src="http://2.su.bdimg.com/icon/1.png"'/><em>斗破苍穹</em>
+  </span>
+  <span class="div_vertical_center">
+    <div class="item_control_group">
+      <span class="item_control control_edit"></span>
+      <span class="item_control control_delete"></span>
+    </div>
+  </span>
+  <span class="pillar"></span>
+</div>
+
+
+</body>
+</html>
