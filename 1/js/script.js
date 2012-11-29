@@ -18,15 +18,8 @@ $.fn.spin = function(opts) {
 };
 (function() {
     var TEST = false;
-    var HOST = TEST ? "http://127.0.0.1" : "http://justlog.sinaapp.com";
-    var URL_USER_INSERT = HOST + "/api/user/insert/";
-    var URL_GET_TOKEN = HOST + "/api/user/get_token/";
-    var URL_LOGOUT = HOST + "/api/user/logout/";
-    var URL_FAV_INSERT = HOST + "/api/http_address/insert/";
-    var URL_FAV_LIST = HOST + "/api/http_address/list/";
-    var URL_FAV_UPDATE = HOST + "/api/http_address/update/";
     var DEF_FAV_ICON = "http://2.su.bdimg.com/icon/1.png";
-    var LOAD_ICON = true;
+    var LOAD_ICON = false;
     var TYPE_DEFAULT_SYMBOL = "*";
 
     var TEST_DATA = '[    {        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "link": "http://mail.google.com/",                        "prompt": ""                    }                ]            },            {                "type": "博客",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "社交",                "items": [                    {                        "name": "新浪微博",                        "link": "http://weibo.com/",                        "prompt": ""                    },                    {                        "name": "人人网",                        "link": "http://www.renren.com/",                        "prompt": ""                    },                    {                        "name": "QQ空间",                        "link": "http://qzone.qq.com/",                        "prompt": ""                    },                    {                        "name": "开心网",                        "link": "http://www.kaixin001.com/",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "谷歌新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    },                    {                        "name": "新浪",                        "link": "http://www.sina.com.cn/",                        "prompt": ""                    },                    {                        "name": "凤凰网",                        "link": "http://www.ifeng.com/",                        "prompt": ""                    },                    {                        "name": "腾讯",                        "link": "http://www.qq.com/",                        "prompt": ""                    },                    {                        "name": "网易",                        "link": "http://www.163.com/",                        "prompt": ""                    }                ]            },            {                "type": "购物",                "items": [                    {                        "name": "淘宝",                        "link": "http://www.taobao.com/",                        "prompt": ""                    },                    {                        "name": "京东",                        "link": "http://www.360buy.com/",                        "prompt": ""                    },                    {                        "name": "亚马逊",                        "link": "http://www.amazon.cn/",                        "prompt": ""                    },                    {                        "name": "凡客",                        "link": "http://www.vancl.com/",                        "prompt": ""                    },                    {                        "name": "1号店",                        "link": "http://www.yihaodian.com/",                        "prompt": ""                    }                ]            }        ]    },    {        "title": "娱乐",        "list": [            {                "type": "影视",                "items": [                    {                        "name": "YouKu",                        "link": "http://www.youku.com/",                        "prompt": ""                    },                    {                        "name": "奇异",                        "link": "http://www.iqiyi.com/",                        "prompt": ""                    },                    {                        "name": "土豆",                        "link": "http://www.tudou.com/",                        "prompt": ""                    },                    {                        "name": "迅雷看看",                        "link": "http://www.xunlei.com/",                        "prompt": ""                    }                ]            },            {                "type": "音乐",                "items": [                    {                        "name": "百度MP3",                        "link": "http://mp3.baidu.com/",                        "prompt": ""                    },                    {                        "name": "QQ音乐",                        "link": "http://y.qq.com/",                        "prompt": ""                    }                ]            },            {                "type": "游戏",                "items": [                    {                        "name": "三国杀",                        "link": "http://www.sanguosha.com/",                        "prompt": ""                    },                    {                        "name": "4399游戏",                        "link": "http://www.4399.com/",                        "prompt": ""                    }                ]            }        ]    }]';
@@ -41,6 +34,8 @@ $.fn.spin = function(opts) {
     var FAVORITE_DATA = $.jStorage.get(KEY_FAVORITE_DATA) || TEST_DATA;
     var KEY_TOKEN = "token";
     var TOKEN = $.jStorage.get(KEY_TOKEN) || "";
+    var API = new API_sina();
+
 
     // var BlobBuilder = BlobBuilder || WebKitBlobBuilder || MozBlobBuilder;
     // var URL = URL || webkitURL || window;
@@ -253,7 +248,7 @@ $.fn.spin = function(opts) {
                         FAVORITE_DATA = json;
                         fillUI();
 
-                        $.post(URL_FAV_UPDATE, {
+                        API.doUpdateFavorite({
                             data: json,
                             user: USER_ID,
                             token: TOKEN
@@ -296,7 +291,7 @@ $.fn.spin = function(opts) {
 
     function register(name, password, onError, onSuccess) {
         var passwdMd5 = $.md5(password);
-        $.post(URL_USER_INSERT, {
+        API.doRegister({
             account: name,
             password: passwdMd5
         }).error(onError).success( function(ret) {
@@ -319,7 +314,7 @@ $.fn.spin = function(opts) {
     }
 
     function getToken(name, password, onError, onSuccess) {
-        $.post(URL_GET_TOKEN, {
+        API.doLogin({
             account: name,
             password: password
         }).error(onError).success( function(ret) {
@@ -347,7 +342,7 @@ $.fn.spin = function(opts) {
         USER_NAME = "";
         FAVORITE_DATA = TEST_DATA;
         TOKEN = "";
-        $.post(URL_LOGOUT, {
+        API.doLogout({
             token: token
         }).error( function(ret) {
             log(ret);
@@ -358,7 +353,7 @@ $.fn.spin = function(opts) {
     }
 
     function insertFavorite() {
-        $.post(URL_FAV_INSERT, {
+        API.doInsertFavorite({
             data: TEST_DATA,
             dataType: "json",
             user: USER_ID,
@@ -377,7 +372,7 @@ $.fn.spin = function(opts) {
             return;
         }
         fillUI();
-        $.post(URL_FAV_LIST, {
+        API.doGetFavorite({
             user: USER_ID,
             token: TOKEN
         }).error( function(ret) {
@@ -407,7 +402,7 @@ $.fn.spin = function(opts) {
             arr = arr.concat(s);
         });
         var json = "[" + arr.join(",") + "]";
-        $.post(URL_FAV_UPDATE, {
+        API.doUpdateFavorite({
             data: json,
             user: USER_ID,
             token: TOKEN
@@ -438,6 +433,44 @@ $.fn.spin = function(opts) {
         $("#nav_profile #user").show();
         Favorite.load(FAVORITE_DATA);
     }
+
+
+    function API_sina() {
+        var HOST = TEST ? "http://127.0.0.1" : "http://justlog.sinaapp.com";
+        var URL_USER_INSERT = HOST + "/api/user/insert/";
+        var URL_GET_TOKEN = HOST + "/api/user/get_token/";
+        var URL_LOGOUT = HOST + "/api/user/logout/";
+        var URL_FAV_INSERT = HOST + "/api/http_address/insert/";
+        var URL_FAV_LIST = HOST + "/api/http_address/list/";
+        var URL_FAV_UPDATE = HOST + "/api/http_address/update/";
+
+        return {
+            doRegister : function(params) {
+                return $.post(URL_USER_INSERT, params);
+            },
+
+            doLogin : function(params) {
+                return $.post(URL_GET_TOKEN, params);
+            },
+
+            doLogout : function(params) {
+                return $.post(URL_LOGOUT, params);
+            },
+
+            doInsertFavorite : function(params) {
+                return $.post(URL_FAV_INSERT, params);
+            },
+
+            doGetFavorite : function(params) {
+                return $.post(URL_FAV_LIST, params);
+            },
+
+            doUpdateFavorite : function(params) {
+                return $.post(URL_FAV_UPDATE, params);
+            }
+        };
+    }
+
 
     var Favorite = {
         "jTemplateBlock": null,
@@ -492,7 +525,7 @@ $.fn.spin = function(opts) {
                 showDialog($("#dialog-import"));
             });
             jNavItem.find("#export").click( function() {
-                $.post(URL_FAV_LIST, {
+                API.doGetFavorite({
                     user: USER_ID,
                     token: TOKEN
                 }).error( function(ret) {
@@ -529,7 +562,7 @@ $.fn.spin = function(opts) {
                 $("#favorite").append(block);
             };
             $("#favorite").sortable({
-                items: '#block',
+                items: '#block'
             });
         },
         "getBlock": function(jTemplate, json) {
@@ -1048,8 +1081,8 @@ $.fn.spin = function(opts) {
         },
         "test": function() {
         }
-    }
+    };
     window.Favorite = Favorite;
 })();
-window.Favorite.goOffline();
+window.Favorite.go();
 window.Favorite.test();
