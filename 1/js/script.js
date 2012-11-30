@@ -1,5 +1,9 @@
 /* Author:
  */
+ApplicationID = "Hku4WXToAqKzCQ9ALyIVi9yJMY2x3TJ7wb0XK8zB";
+JavascriptKey = "aAKd8J7Diq0XylBNzKFpjWdqEHyolBJHNoqjxBzO";
+Parse.initialize(ApplicationID, JavascriptKey);
+
 $.fn.spin = function(opts) {
     this.each( function() {
         var $this = $(this), data = $this.data();
@@ -19,7 +23,7 @@ $.fn.spin = function(opts) {
 (function() {
     var TEST = false;
     var DEF_FAV_ICON = "http://2.su.bdimg.com/icon/1.png";
-    var LOAD_ICON = false;
+    var LOAD_ICON = true;
     var TYPE_DEFAULT_SYMBOL = "*";
 
     var TEST_DATA = '[    {        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "link": "http://mail.google.com/",                        "prompt": ""                    }                ]            },            {                "type": "博客",                "items": [                    {                        "name": "j_fo blog",                        "link": "http://hi.baidu.com/j_fo/blog",                        "prompt": ""                    }                ]            },            {                "type": "社交",                "items": [                    {                        "name": "新浪微博",                        "link": "http://weibo.com/",                        "prompt": ""                    },                    {                        "name": "人人网",                        "link": "http://www.renren.com/",                        "prompt": ""                    },                    {                        "name": "QQ空间",                        "link": "http://qzone.qq.com/",                        "prompt": ""                    },                    {                        "name": "开心网",                        "link": "http://www.kaixin001.com/",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "谷歌新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    },                    {                        "name": "新浪",                        "link": "http://www.sina.com.cn/",                        "prompt": ""                    },                    {                        "name": "凤凰网",                        "link": "http://www.ifeng.com/",                        "prompt": ""                    },                    {                        "name": "腾讯",                        "link": "http://www.qq.com/",                        "prompt": ""                    },                    {                        "name": "网易",                        "link": "http://www.163.com/",                        "prompt": ""                    }                ]            },            {                "type": "购物",                "items": [                    {                        "name": "淘宝",                        "link": "http://www.taobao.com/",                        "prompt": ""                    },                    {                        "name": "京东",                        "link": "http://www.360buy.com/",                        "prompt": ""                    },                    {                        "name": "亚马逊",                        "link": "http://www.amazon.cn/",                        "prompt": ""                    },                    {                        "name": "凡客",                        "link": "http://www.vancl.com/",                        "prompt": ""                    },                    {                        "name": "1号店",                        "link": "http://www.yihaodian.com/",                        "prompt": ""                    }                ]            }        ]    },    {        "title": "娱乐",        "list": [            {                "type": "影视",                "items": [                    {                        "name": "YouKu",                        "link": "http://www.youku.com/",                        "prompt": ""                    },                    {                        "name": "奇异",                        "link": "http://www.iqiyi.com/",                        "prompt": ""                    },                    {                        "name": "土豆",                        "link": "http://www.tudou.com/",                        "prompt": ""                    },                    {                        "name": "迅雷看看",                        "link": "http://www.xunlei.com/",                        "prompt": ""                    }                ]            },            {                "type": "音乐",                "items": [                    {                        "name": "百度MP3",                        "link": "http://mp3.baidu.com/",                        "prompt": ""                    },                    {                        "name": "QQ音乐",                        "link": "http://y.qq.com/",                        "prompt": ""                    }                ]            },            {                "type": "游戏",                "items": [                    {                        "name": "三国杀",                        "link": "http://www.sanguosha.com/",                        "prompt": ""                    },                    {                        "name": "4399游戏",                        "link": "http://www.4399.com/",                        "prompt": ""                    }                ]            }        ]    }]';
@@ -34,7 +38,8 @@ $.fn.spin = function(opts) {
     var FAVORITE_DATA = $.jStorage.get(KEY_FAVORITE_DATA) || TEST_DATA;
     var KEY_TOKEN = "token";
     var TOKEN = $.jStorage.get(KEY_TOKEN) || "";
-    var API = new API_sina();
+    var API = new API_parse();
+              //new API_sina();
 
 
     // var BlobBuilder = BlobBuilder || WebKitBlobBuilder || MozBlobBuilder;
@@ -290,7 +295,9 @@ $.fn.spin = function(opts) {
     }
 
     function register(name, password, onError, onSuccess) {
-        var passwdMd5 = $.md5(password);
+        var passwdMd5 = password;
+        if (API instanceof API_sina)
+            passwdMd5 = $.md5(password);
         API.doRegister({
             account: name,
             password: passwdMd5
@@ -444,7 +451,7 @@ $.fn.spin = function(opts) {
         var URL_FAV_LIST = HOST + "/api/http_address/list/";
         var URL_FAV_UPDATE = HOST + "/api/http_address/update/";
 
-        return {
+        $.extend(API_sina.prototype, {
             doRegister : function(params) {
                 return $.post(URL_USER_INSERT, params);
             },
@@ -468,8 +475,225 @@ $.fn.spin = function(opts) {
             doUpdateFavorite : function(params) {
                 return $.post(URL_FAV_UPDATE, params);
             }
-        };
+        });
+
+        function Dummy() {}
+        Dummy.prototype = API_sina.prototype;
+        return new Dummy();
     }
+
+    function API_parse() {
+        var Favorite = Parse.Object.extend("Favorite");
+        var F_USER = 1, 
+            F_FAVORITE_DATA = 2;
+        var T_ERROR = 1,
+            T_REGISTER_SUCCESS = 2,
+            T_LOGIN_SUCCESS = 3,
+            T_INSERT_FAVORITE_DATA = 4,
+            T_GET_FAVORITE_DATA = 5,
+            T_UPDATE_FAVORITE_DATA = 6;
+
+        function from(type, params) {
+            switch (type) {
+                case F_USER:
+                    return {
+                        username : params.account,
+                        password : params.password
+                    };
+                case F_FAVORITE_DATA:
+                    return {
+                        data : params.data
+                    };
+            }
+        }
+
+        function to(type, obj) {
+            switch (type) {
+                case T_ERROR:
+                    // {"err_code":10004,"err_msg":"DATABASE ERROR "}
+                    return $.toJSON({
+                        err_code : obj.code,
+                        err_msg : obj.message
+                    });
+                case T_REGISTER_SUCCESS:
+                    // {"err_code":"0","err_msg":"success","data":
+                    // [{"id":"25","account":"aaa","password":"123456"}]}
+                    return $.toJSON({
+                        err_code : 0,
+                        err_msg : "success",
+                        data : [{
+                            id : obj.id,
+                            account : obj.getUsername(),
+                            password : obj.changed.password
+                        }]
+                    });
+                case T_LOGIN_SUCCESS:
+                    // {"err_code":"0","err_msg":"success","data":
+                    // {"token":"98fddc227b264275d792ec2f1384997f","uid":"13"}}
+                    return $.toJSON({
+                        err_code : 0,
+                        err_msg : "success",
+                        data : {
+                            uid : obj.id,
+                            token : obj._sessionToken
+                        }
+                    });
+                case T_INSERT_FAVORITE_DATA:
+                    // {"err_code":"0","err_msg":"success","data":
+                    // [{"id":"56","user":"1(userId)","data":"abc","time":"2012-11-29 18:40:10"}]}
+                    return $.toJSON({
+                        err_code : 0,
+                        err_msg : "success",
+                        data : [{
+                            id : obj.id,
+                            user : Parse.User.current().id,
+                            data : obj.changed.data,
+                            time : obj.createdAt
+                        }]
+                    });
+                case T_GET_FAVORITE_DATA:
+                    if (!obj)
+                        return '{"err_code":"0","err_msg":"success","data":null}';
+                    // "{"err_code":"0","err_msg":"success","data":
+                    // {"items":[{"id":"45","user":"13(userId)","data":"...json...","time":"2012-05-23 10:47:27"}],
+                    // "max_id":"45","min_id":"45"}}"
+                    return $.toJSON({
+                        err_code : 0,
+                        err_msg : "success",
+                        data : {
+                            items : [{
+                                id : obj.id,
+                                user : Parse.User.current().id,
+                                data : obj.attributes.data,
+                                time : obj.updatedAt
+                            }],
+                            max_id : obj.id,
+                            min_id : obj.id
+                        }
+                    });
+                case T_UPDATE_FAVORITE_DATA:
+                    // "{"err_code":"0","err_msg":"success","data":
+                    // [{"id":"45","user":"13(userId)","data":"...json...","time":"2012-05-23 10:47:27"}]}"
+                    return $.toJSON({
+                        err_code : 0,
+                        err_msg : "success",
+                        data : [{
+                            id : obj.id,
+                            user : Parse.User.current().id,
+                            data : obj.attributes.data,
+                            time : obj.updatedAt
+                        }]
+                    });
+            }
+        }
+
+        function wrapDeferred(defer) {
+            return $.extend(defer.promise(), {
+                success : defer.done,
+                error : defer.fail
+            });
+        }
+
+        $.extend(API_parse.prototype, {
+            doRegister : function(params) {
+                var defer = $.Deferred();
+                var user = new Parse.User();
+                user.set(from(F_USER, params));
+                user.signUp(null, {
+                    success : function(user) {
+                        defer.resolve(to(T_REGISTER_SUCCESS, user));
+                    },
+                    error : function(user, error) {
+                        defer.reject(to(T_ERROR, error));
+                    }
+                });
+                return wrapDeferred(defer);
+            },
+
+            doLogin : function(params) {
+                var defer = $.Deferred();
+                var user = new Parse.User();
+                user.set(from(F_USER, params));
+                user.logIn({
+                    success : function(user) {
+                        defer.resolve(to(T_LOGIN_SUCCESS, user));
+                    },
+                    error : function(user, error) {
+                        defer.reject(to(T_ERROR, error));
+                    }
+                });
+                return wrapDeferred(defer);
+            },
+
+            doLogout : function(params) {
+                var defer = $.Deferred();
+                Parse.User.logOut();
+                defer.resolve("logout success.");
+                return wrapDeferred(defer);
+            },
+
+            doInsertFavorite : function(params) {
+                var defer = $.Deferred();
+                var fav = new Favorite();
+                fav.set(from(F_FAVORITE_DATA, params));
+                fav.setACL(new Parse.ACL(Parse.User.current()));
+                fav.save(null, {
+                    success : function(fav) {
+                        defer.resolve(to(T_INSERT_FAVORITE_DATA, fav));
+                    },
+                    error : function(fav, error) {
+                        defer.reject(to(T_ERROR, error));
+                    }
+                });
+                return wrapDeferred(defer);
+            },
+
+            doGetFavorite : function(params) {
+                var defer = $.Deferred();
+                var query = new Parse.Query(Favorite);
+                query.find({
+                    success: function(results) {
+                        var fav = results[0];
+                        if (!fav) {
+                            defer.resolve('{"err_code":"0","err_msg":"success","data":null}');
+                        } else {
+                            defer.resolve(to(T_GET_FAVORITE_DATA, fav));
+                        }
+                    },
+                    error: function(error) {
+                        defer.reject(to(T_ERROR, error));
+                    }
+                })
+                return wrapDeferred(defer);
+            },
+
+            doUpdateFavorite : function(params) {
+                var defer = $.Deferred();
+                var query = new Parse.Query(Favorite);
+                query.find({
+                    success: function(results) {
+                        var fav = results[0];
+                        fav.set(from(F_FAVORITE_DATA, params));
+                        fav.save(null, {
+                            success: function(fav) {
+                                defer.resolve(to(T_UPDATE_FAVORITE_DATA, fav));
+                            },
+                            error: function(fav, error) {
+                                defer.reject(to(T_ERROR, error));
+                            }
+                        });
+                    },
+                    error: function(error) {
+                        defer.reject(to(T_ERROR, error));
+                    }
+                }); 
+                return wrapDeferred(defer);
+            }
+        });
+
+        function Dummy() {}
+        Dummy.prototype = API_parse.prototype;
+        return new Dummy();    }
 
 
     var Favorite = {
