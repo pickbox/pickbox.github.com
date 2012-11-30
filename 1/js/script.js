@@ -40,6 +40,7 @@ $.fn.spin = function(opts) {
     var TOKEN = $.jStorage.get(KEY_TOKEN) || "";
     var API = new API_parse();
               //new API_sina();
+              //new API_offline();
 
 
     // var BlobBuilder = BlobBuilder || WebKitBlobBuilder || MozBlobBuilder;
@@ -482,6 +483,13 @@ $.fn.spin = function(opts) {
         return new Dummy();
     }
 
+    function wrapDeferred(defer) {
+        return $.extend(defer.promise(), {
+            success : defer.done,
+            error : defer.fail
+        });
+    }
+
     function API_parse() {
         var Favorite = Parse.Object.extend("Favorite");
         var F_USER = 1, 
@@ -587,13 +595,6 @@ $.fn.spin = function(opts) {
             }
         }
 
-        function wrapDeferred(defer) {
-            return $.extend(defer.promise(), {
-                success : defer.done,
-                error : defer.fail
-            });
-        }
-
         $.extend(API_parse.prototype, {
             doRegister : function(params) {
                 var defer = $.Deferred();
@@ -694,6 +695,78 @@ $.fn.spin = function(opts) {
         function Dummy() {}
         Dummy.prototype = API_parse.prototype;
         return new Dummy();    }
+
+    function API_offline() {
+        var USER_ID_LOCAL = "local";
+        var TOKEN_LOCAL = "local";
+
+        $.extend(API_offline.prototype, {
+            doRegister : function(params) {
+                var defer = $.Deferred();
+                defer.reject();
+                return wrapDeferred(defer);
+            },
+
+            doLogin : function(params) {
+                var defer = $.Deferred();
+                defer.resolve($.toJSON({
+                    err_code : 0,
+                    err_msg : "success",
+                    data : {
+                        uid : USER_ID_LOCAL,
+                        token : TOKEN_LOCAL
+                    }
+                }));
+                return wrapDeferred(defer);
+            },
+
+            doLogout : function(params) {
+                var defer = $.Deferred();
+                defer.resolve();
+                return wrapDeferred(defer);
+            },
+
+            doInsertFavorite : function(params) {
+                var defer = $.Deferred();
+                defer.reject();
+                return wrapDeferred(defer);
+            },
+
+            doGetFavorite : function(params) {
+                var defer = $.Deferred();
+                var arr = [];
+                $("#favorite").find(".block").each( function() {
+                    var s = Favorite.onExport($(this));
+                    arr = arr.concat(s);
+                });
+                var json = "[" + arr.join(",") + "]";
+                log(json);
+                defer.resolve($.toJSON({
+                    err_code : 0,
+                    err_msg : "success",
+                    data : {
+                        items : [{
+                            id : -1,
+                            user : USER_ID_LOCAL,
+                            data : json,
+                            time : new Date().toLocaleString()
+                        }]
+                    }
+                }));
+                return wrapDeferred(defer);
+            },
+
+            doUpdateFavorite : function(params) {
+                var defer = $.Deferred();
+                defer.reject("Not supported in offline mode");
+                return wrapDeferred(defer);
+            }
+        });
+
+        function Dummy() {}
+        Dummy.prototype = API_offline.prototype;
+        return new Dummy();
+    }
 
 
     var Favorite = {
