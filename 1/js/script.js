@@ -880,11 +880,14 @@ $.fn.spin = function(opts) {
                     jListItem2.find("#type").text(type);
                 } else {
                     jListItem2.find("#type").text(TYPE_DEFAULT_SYMBOL);
-                    jListItem2.find("#seperator").hide();
-                    jListItem2.find("#type").hide();
+                    // jListItem2.find("#seperator").hide();
+                    // jListItem2.find("#type").hide();
+                    jListItem2.find("#seperator").css("display", "none");
+                    jListItem2.find("#type").css("display", "none");
                 }
                 var jItemAdd = jListItem2.find("#item_add");
-                jItemAdd.hide();
+                // jItemAdd.hide();
+                jItemAdd.css("display", "none");
                 for (var j = 0; j < items.length; j++) {
                     var link = items[j].link;
                     var name = items[j].name;
@@ -908,8 +911,10 @@ $.fn.spin = function(opts) {
                     jItem2link.attr("title", prompt);
                     jItem2link.find("#item_name").text(name);
                     jItem2link.find("img").attr("src", favicon);
-                    jItem2.find("#control_edit").hide();
-                    jItem2.find("#control_delete").hide();
+                    // jItem2.find("#control_edit").hide();
+                    // jItem2.find("#control_delete").hide();
+                    jItem2.find("#control_edit").css("display", "none");
+                    jItem2.find("#control_delete").css("display", "none");
                     jItemAdd.before(jItem2);
                     this.attachDragAndDrop(jItem2, jBlock);
                 };
@@ -922,11 +927,13 @@ $.fn.spin = function(opts) {
             jBlock.find("#list #list_item:odd").addClass("even");
             var listItemAdd = jBlock.find("#list_item_add");
             jBlock.find("#list").append(listItemAdd);
-            listItemAdd.hide();
+            // listItemAdd.hide();
+            listItemAdd.css("display", "none");
             if (list.length > 10) {
                 var listItemAdd2 = listItemAdd.clone();
                 jBlock.find("#list").prepend(listItemAdd2);
-                listItemAdd2.hide();
+                // listItemAdd2.hide();
+                listItemAdd2.css("display", "none");
             }
             jBlock.find("#list").sortable({
                 items: '#list_item',
@@ -1007,30 +1014,40 @@ $.fn.spin = function(opts) {
 
             var jItem = jBlock.find("#item");
             jItem.addClass("dotted_border");
-            jItem.find("#control_edit").show();
-            jItem.find("#control_delete").show();
+            // jItem.find("#control_edit").show();
+            // jItem.find("#control_delete").show();
+            jItem.find("#control_edit").css("display", "");
+            jItem.find("#control_delete").css("display", ""); 
+
             var jLink = jItem.find("#a");
             this.inactivateLink(jLink);
 
             this.wrapIMenu(jItem);
             var jItemAdd = jBlock.find("#item_add");
-            jItemAdd.show();
+            // jItemAdd.show();
+            jItemAdd.css("display", "");
+
             this.wrapIMenu(jItemAdd);
 
-            jBlock.find("#type").show();
-            jBlock.find("#seperator").show();
+            // jBlock.find("#type").show();
+            // jBlock.find("#seperator").show();
+            jBlock.find("#type").css("display", "");
+            jBlock.find("#seperator").css("display", "");
+
             this.wrapIMenu(jBlock.find("#item_box_type"));
 
             var jListItemAdd = jBlock.find("#list_item_add");
-            jListItemAdd.show();
+            // jListItemAdd.show();
+            jListItemAdd.css("display", "");
+
             this.wrapIMenu(jListItemAdd.find("#list_item_add_item"));
             this.wrapIMenu(jBlock.find("#title"));
 
-            jItem.each( function() {
+            jItem.each(function() {
                 var item = $(this);
                 var jElem = item.parents("#imenu");
                 item.find("#control_edit").unbind();
-                item.find("#control_edit").click( function() {
+                item.find("#control_edit").click(function() {
                     if (thiz.lastItemEdited != null)
                         thiz.lastItemEdited.children("#imenu_items").slideUp(150);
                     jElem.children("#imenu_items").slideDown(150);
@@ -1038,19 +1055,21 @@ $.fn.spin = function(opts) {
                     thiz.onEdit(jElem);
                 });
                 item.find("#control_delete").unbind();
-                item.find("#control_delete").click( function() {
+                item.find("#control_delete").click(function() {
                     if (thiz.lastItemEdited != null)
                         thiz.lastItemEdited.children("#imenu_items").slideUp(150);
                     thiz.onDelete(jBlock, item);
                 });
-            });
+            }); 
         },
         "onNormalMode": function(jBlock) {
             var mode = jBlock.attr("data-mode");
             jBlock.attr("data-mode", "");
 
-            jBlock.find("#ok").hide();
-            jBlock.find("#menu").show();
+            // jBlock.find("#ok").hide();
+            // jBlock.find("#menu").show();
+            jBlock.find("#ok").css("display", "none");
+            jBlock.find("#menu").css("display", "");
             var jItem = jBlock.find("#item");
             jItem.removeClass("dotted_border");
 
@@ -1063,7 +1082,8 @@ $.fn.spin = function(opts) {
             } else if (mode == "edit") {
                 this.unwrapIMenu(jBlock.find("#item"));
                 this.unwrapIMenu(jBlock.find("#item_add"));
-                jBlock.find("#item_add").hide();
+                // jBlock.find("#item_add").hide();
+                jBlock.find("#item_add").css("display", "none");
                 this.unwrapIMenu(jBlock.find("#item_box_type"));
 
                 jBlock.find("#list_item").each(function(){
@@ -1071,14 +1091,17 @@ $.fn.spin = function(opts) {
                     var jType = jListItem.find("#type");
                     var jSeperator = jListItem.find("#seperator");
                     if (!jType.text() || jType.text() == TYPE_DEFAULT_SYMBOL) {
-                        jType.hide();
-                        jSeperator.hide();
+                        // jType.hide();
+                        // jSeperator.hide();
+                        jType.css("display", "none");
+                        jSeperator.css("display", "none");
                     }
                 });
                 jItem.unbind();
                 this.attachDragAndDrop(jItem, jBlock);
                 var jListItemAdd = jBlock.find("#list_item_add");
-                jListItemAdd.hide();
+                // jListItemAdd.hide();
+                jListItemAdd.css("display", "none");
                 if (jListItemAdd.length == 2) {
                     var jList = jBlock.find("#list");
                     jList.prepend(jListItemAdd[0]);
@@ -1087,8 +1110,10 @@ $.fn.spin = function(opts) {
                 this.unwrapIMenu(jBlock.find("#list_item_add_item"));
                 this.unwrapIMenu(jBlock.find("#title"));
 
-                jItem.find("#control_edit").hide();
-                jItem.find("#control_delete").hide();
+                // jItem.find("#control_edit").hide();
+                // jItem.find("#control_delete").hide();
+                jItem.find("#control_edit").css("display", "none");
+                jItem.find("#control_delete").css("display", "none");
             }
         },
         "onDelete": function(jBlock, jItem) {
