@@ -919,6 +919,18 @@ $.fn.spin = function(opts) {
                     this.attachDragAndDrop(jItem2, jBlock);
                 };
                 jItemAdd.parent().append(jItemAdd);
+                // initRowDelete here
+                var jItemRowDelete = jListItem2.find("#row_delete");
+                jItemRowDelete.click(function(){
+                    $(this).parents("#list_item").remove();
+                    jBlock.find("#list #list_item:odd").addClass("even");
+                    jBlock.find("#list #list_item:even").removeClass("even");
+                });
+                jListItem2.hover(function(){
+                    $(this).find("#row_delete").css("display", "");
+                }, function(){
+                    $(this).find("#row_delete").css("display", "none");
+                });
                 jListItem2.droppable({
                     drop: handleItemDropEvent
                 });
