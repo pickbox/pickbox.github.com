@@ -1108,6 +1108,15 @@ $.fn.spin = function(opts) {
                         jType.css("display", "none");
                         jSeperator.css("display", "none");
                     }
+                    jListItem.unbind();
+                    jListItem.hover(function(){
+                        $(this).find("#row_delete").css("display", "");
+                    }, function(){
+                        $(this).find("#row_delete").css("display", "none");
+                    });
+                    jListItem.droppable({
+                        drop: handleItemDropEvent
+                    });
                 });
                 jItem.unbind();
                 this.attachDragAndDrop(jItem, jBlock);
