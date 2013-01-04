@@ -124,6 +124,7 @@
 }
 .item_box_type {
 /*    width: 60px;*/
+    font-weight: bold;
 }
 .item_box_seperator {
 }
