@@ -1,4 +1,4 @@
-/* Author:
+﻿/* Author:
  */
 ApplicationID = "Hku4WXToAqKzCQ9ALyIVi9yJMY2x3TJ7wb0XK8zB";
 JavascriptKey = "aAKd8J7Diq0XylBNzKFpjWdqEHyolBJHNoqjxBzO";
@@ -772,6 +772,7 @@ $.fn.spin = function(opts) {
     var Favorite = {
         "jTemplateBlock": null,
         "jTemplateBlockGroup": null,
+        "jTemplateIMenu": null,
         "jTemplateBlockJson": '{"title": "新分组","list": [{"type": "新类别","items": [{"name": "新浪微博","link": "https://weibo.com/","prompt": "新浪微博"}]}]}',
         "lastItemEdited": null,
         "init": function() {
@@ -785,6 +786,10 @@ $.fn.spin = function(opts) {
             if (this.jTemplateBlockGroup === null) {
                 this.jTemplateBlockGroup = $("#block_group");
             }
+            if (this.jTemplateIMenu === null) {
+                this.jTemplateIMenu = $("#imenu");
+            }
+            $("#imenu").remove();
             $("#block_group").remove();
             $("#block").remove();
             this.initFavoriteMenu();
@@ -1088,6 +1093,7 @@ $.fn.spin = function(opts) {
                     thiz.onDelete(jBlock, item);
                 });
             }); 
+            $("#block_group").masonry({itemSelector:'#block'});
         },
         "onNormalMode": function(jBlock) {
             var mode = jBlock.attr("data-mode");
@@ -1151,6 +1157,7 @@ $.fn.spin = function(opts) {
                 jItem.find("#control_edit").css("display", "none");
                 jItem.find("#control_delete").css("display", "none");
             }
+            $("#block_group").masonry({itemSelector:'#block'});
         },
         "onDelete": function(jBlock, jItem) {
             if (jItem.attr("id") == "item") {
@@ -1327,7 +1334,7 @@ $.fn.spin = function(opts) {
         },
         "wrapIMenu": function(jItem) {
             var thiz = this;
-            var jIMenu = $("#imenu").clone();
+            var jIMenu = this.jTemplateIMenu.clone();
             jItem.wrap(jIMenu);
             var parent = jItem.parent();
             parent.each( function() {
