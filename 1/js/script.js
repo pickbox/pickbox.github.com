@@ -250,6 +250,8 @@ $.fn.spin = function(opts) {
                     var reader = new FileReader();
                     reader.onload = function() {
                         var json = this.result;
+                        // compress json, remove spaces
+                        json = $.toJSON($.evalJSON(json))
                         $.jStorage.set(KEY_FAVORITE_DATA, json);
                         FAVORITE_DATA = json;
                         fillUI();
