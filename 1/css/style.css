@@ -210,7 +210,7 @@ ul, ol, li {
     font-size: 12px;
     min-width: 80%;
     color: #666;
-    background: #F7F7F7 url(http://s1.hao123img.com/index/images/main1.png) repeat-x 0 0;
+    background: #F7F7F7 url(../images/main1.png) repeat-x 0 0;
     border-bottom: 1px solid #E8E8E9;
 }
 .box {
@@ -278,7 +278,7 @@ ul, ol, li {
     margin: 4px;
 }
 
-.ui-progressbar-value { background-image: url(images/pbar-ani.gif); }
+.ui-progressbar-value { background-image: url(../images/pbar-ani.gif); }
 
 
 
