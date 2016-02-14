@@ -50,7 +50,11 @@
             })
         },
 
-        methods: {}
+        methods: {
+            onDeleteBlock (index) {
+                this.blocks.splice(index, 1)
+            }
+        }
     }
 
 </script>

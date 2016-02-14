@@ -8,7 +8,7 @@
                                                                 class="icon iconfont item_control">&#xe75d;</i></span>
             <div v-if="!editMode" id="title_controls" class="title_controls">
                 <span @click="toggleEdit" class="title_control c_edit"><i class="icon iconfont">&#xe61e;</i>编辑</span>
-                <span class="title_control c_delete"><i class="icon iconfont">&#xe65c;</i></span>
+                <span @click="onDeleteBlock" class="title_control c_delete"><i class="icon iconfont">&#xe65c;</i></span>
             </div>
         <span v-if="editMode" @click="toggleEdit" class="title_control c_back"><i class="icon iconfont">
             &#xe602;</i>完成</span>
@@ -26,16 +26,16 @@
                target="{{ !editMode ? '_blank' : '' }}"
                class="dis-box box-horizontal align-center item_link {{ editMode ? 'item_link_edit' : '' }}">
                 <img :src="item.link + '/favicon.ico'" class="item_link_img"
-                     onerror='javascript:this.src="http://2.su.bdimg.com/icon/1.png"'/>
+                     @error="onLinkImgError($event)"/>
                 {{ item.name }}
                 <i v-if="editMode" @click="onEditItem(item)" class="icon iconfont item_control i_edit">&#xe75d;</i>
-                <i v-if="editMode" class="icon iconfont item_control i_delete">&#xf0046;</i>
+                <i v-if="editMode" @click="onDeleteItem(list_row, $index)" class="icon iconfont item_control i_delete">&#xf0046;</i>
             </a>
 
             <span v-if="editMode" @click="onEditAddItem(list_row.items)" class="item_link item_link_add"><i
                     class="icon iconfont">&#xe607;</i>添加</span>
             <span class="flex"></span>
-            <span v-if="editMode" class="item_link column_tail"><i class="icon iconfont">&#xe65c;</i></span>
+            <span v-if="editMode" @click="onDeleteRow(block, $index)" class="item_link column_tail"><i class="icon iconfont i_close">&#xe65c;</i></span>
         </div>
 
         <!-- row for add new category -->
@@ -108,6 +108,11 @@
                                 sibling.className.indexOf('list_row_add') >= 0);
                     }
                 })
+            },
+
+            onLinkImgError (event) {
+                var img = require('src/assets/web.png')
+                event.target.src = img
             },
 
             getEditDialogBody () {
@@ -209,6 +214,18 @@
                         })
                     }
                 })
+            },
+
+            onDeleteItem (row, index) {
+                row.items.splice(index, 1)
+            },
+
+            onDeleteRow(block, index) {
+                block.list.splice(index, 1)
+            },
+
+            onDeleteBlock () {
+                this.$parent.onDeleteBlock(this.index)
             }
         }
     }
