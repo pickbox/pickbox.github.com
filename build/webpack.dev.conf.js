@@ -1,6 +1,7 @@
 var webpack = require('webpack')
 var config = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 // eval-source-map is faster for development
 //config.devtool = 'eval-source-map'
@@ -22,6 +23,7 @@ config.plugins = (config.plugins || []).concat([
   new webpack.optimize.OccurenceOrderPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoErrorsPlugin(),
+  new ExtractTextPlugin('[name].css'),
   // https://github.com/ampedandwired/html-webpack-plugin
   new HtmlWebpackPlugin({
     filename: 'index.html',
