@@ -1,9 +1,11 @@
 <template>
     <div id="favorite">
 
-        <button id="add_block">添加新组</button>
+        <div class="sui-btn-group">
+            <button class="sui-btn btn-bordered btn-primary">添加新组</button>
+        </div>
 
-        <div id="block_group">
+        <div id="block_group" class="dis-box box-vertical">
 
             <block v-for="block in blocks" :block="block" :index="$index">
             </block>
@@ -15,6 +17,7 @@
 
 <script>
     require('dragula/dist/dragula.css')
+    require('src/css/flexbox.css')
 
     import dragula from 'dragula'
     import Block from './Block'

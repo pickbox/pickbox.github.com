@@ -49,9 +49,9 @@
 </template>
 
 <script>
+    require('dragula/dist/dragula.css')
     require("src/assets/fonts/iconfont.css");
     require('src/css/flexbox.css')
-    require('dragula/dist/dragula.css')
 
     import dragula from 'dragula'
 
@@ -235,7 +235,7 @@
 <style>
     .block {
         float: left;
-        width: 350px;
+        /*width: 350px;*/
         margin: 5px;
         border: 1px solid #C4C4C4;
         border-top: 0;
