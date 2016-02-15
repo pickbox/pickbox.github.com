@@ -6,7 +6,18 @@ var webpack = require('webpack')
 module.exports = {
   entry: {
     app: './src/main.js',
-    vendor: ['jquery', 'sui.js', 'sui.less']
+    vendor: [
+      'jquery',
+      'blueimp-md5',
+      'jquery-storage-api/jquery.storageapi.js',
+      'toastr',
+      'toastr/toastr.scss',
+      'dragula',
+      'dragula/dragula.styl',
+      'sui.js',
+      'sui.less',
+      'lib/bootstrap/less/bootstrap-grid.less'
+    ]
   },
   output: {
     path: path.resolve(__dirname, '../dist/static'),
@@ -48,6 +59,10 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')
       },
       {
+        test: /\.styl$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!stylus-loader')
+      },
+      {
         test: /\.(css|scss)$/,
         //loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 version!sass-loader'
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader?browsers=last 2 version!sass-loader')
@@ -85,7 +100,10 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
-      'window.jQuery': 'jquery'
+      'window.jQuery': 'jquery',
+      dragula: 'dragula',
+      md5: 'blueimp-md5',
+      Toast: 'toastr'
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'

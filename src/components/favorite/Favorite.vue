@@ -1,13 +1,24 @@
 <template>
     <div id="favorite">
 
-        <div class="sui-btn-group">
-            <button class="sui-btn btn-bordered btn-primary">添加新组</button>
+        <div>
+            <div class="sui-btn-group">
+                <button @click="onEditAddBlock" class="sui-btn btn-bordered btn-primary"><i class="icon iconfont">
+                    &#xe611;</i>添加新组
+                </button>
+            </div>
+
+            <div class="sui-btn-group pull-right">
+                <button class="sui-btn btn-bordered btn-primary"><i class="icon iconfont">&#xe615;</i>导入</button>
+                <button class="sui-btn btn-bordered btn-primary"><i class="icon iconfont">&#xe60c;</i>导出</button>
+            </div>
+
+            <div class="clearfix"></div>
         </div>
 
         <div id="block_group" class="dis-box box-vertical">
 
-            <block v-for="block in blocks" :block="block" :index="$index">
+            <block v-for="block in blocks" :block="block" :index="$index" track-by="$index">
             </block>
 
         </div>
@@ -16,13 +27,12 @@
 </template>
 
 <script>
-    require('dragula/dist/dragula.css')
     require('src/css/flexbox.css')
 
-    import dragula from 'dragula'
     import Block from './Block'
 
-    var TEST_DATA = '[    {        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "link": "http://mail.google.com/",                        "prompt": ""                    }                ]            },            {                "type": "博客",                "items": [                    {                        "name": "jfo planet",                        "link": "http://blog.pickbox.me",                        "prompt": ""                    }                ]            },            {                "type": "社交",                "items": [                    {                        "name": "新浪微博",                        "link": "http://weibo.com/",                        "prompt": ""                    },                    {                        "name": "人人网",                        "link": "http://www.renren.com/",                        "prompt": ""                    },                    {                        "name": "QQ空间",                        "link": "http://qzone.qq.com/",                        "prompt": ""                    },                    {                        "name": "开心网",                        "link": "http://www.kaixin001.com/",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "谷歌新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    },                    {                        "name": "新浪",                        "link": "http://www.sina.com.cn/",                        "prompt": ""                    },                    {                        "name": "凤凰网",                        "link": "http://www.ifeng.com/",                        "prompt": ""                    },                    {                        "name": "腾讯",                        "link": "http://www.qq.com/",                        "prompt": ""                    },                    {                        "name": "网易",                        "link": "http://www.163.com/",                        "prompt": ""                    }                ]            },            {                "type": "购物",                "items": [                    {                        "name": "淘宝",                        "link": "http://www.taobao.com/",                        "prompt": ""                    },                    {                        "name": "京东",                        "link": "http://www.360buy.com/",                        "prompt": ""                    },                    {                        "name": "亚马逊",                        "link": "http://www.amazon.cn/",                        "prompt": ""                    },                    {                        "name": "凡客",                        "link": "http://www.vancl.com/",                        "prompt": ""                    },                    {                        "name": "1号店",                        "link": "http://www.yihaodian.com/",                        "prompt": ""                    }                ]            }        ]    },    {        "title": "娱乐",        "list": [            {                "type": "影视",                "items": [                    {                        "name": "YouKu",                        "link": "http://www.youku.com/",                        "prompt": ""                    },                    {                        "name": "奇异",                        "link": "http://www.iqiyi.com/",                        "prompt": ""                    },                    {                        "name": "土豆",                        "link": "http://www.tudou.com/",                        "prompt": ""                    },                    {                        "name": "迅雷看看",                        "link": "http://www.xunlei.com/",                        "prompt": ""                    }                ]            },            {                "type": "音乐",                "items": [                    {                        "name": "百度MP3",                        "link": "http://mp3.baidu.com/",                        "prompt": ""                    },                    {                        "name": "QQ音乐",                        "link": "http://y.qq.com/",                        "prompt": ""                    }                ]            },            {                "type": "游戏",                "items": [                    {                        "name": "三国杀",                        "link": "http://www.sanguosha.com/",                        "prompt": ""                    },                    {                        "name": "4399游戏",                        "link": "http://www.4399.com/",                        "prompt": ""                    }                ]            }        ]    },{        "title": "常用",        "list": [            {                "type": "谷歌",                "items": [                    {                        "name": "GReader",                        "link": "https://www.google.com/reader/view",                        "prompt": ""                    },                    {                        "name": "GMail",                        "link": "http://mail.google.com/",                        "prompt": ""                    }                ]            },            {                "type": "博客",                "items": [                    {                        "name": "jfo planet",                        "link": "http://blog.pickbox.me",                        "prompt": ""                    }                ]            },            {                "type": "社交",                "items": [                    {                        "name": "新浪微博",                        "link": "http://weibo.com/",                        "prompt": ""                    },                    {                        "name": "人人网",                        "link": "http://www.renren.com/",                        "prompt": ""                    },                    {                        "name": "QQ空间",                        "link": "http://qzone.qq.com/",                        "prompt": ""                    },                    {                        "name": "开心网",                        "link": "http://www.kaixin001.com/",                        "prompt": ""                    }                ]            },            {                "type": "资讯",                "items": [                    {                        "name": "谷歌新闻",                        "link": "http://news.google.com.hk/",                        "prompt": ""                    },                    {                        "name": "新浪",                        "link": "http://www.sina.com.cn/",                        "prompt": ""                    },                    {                        "name": "凤凰网",                        "link": "http://www.ifeng.com/",                        "prompt": ""                    },                    {                        "name": "腾讯",                        "link": "http://www.qq.com/",                        "prompt": ""                    },                    {                        "name": "网易",                        "link": "http://www.163.com/",                        "prompt": ""                    }                ]            },            {                "type": "购物",                "items": [                    {                        "name": "淘宝",                        "link": "http://www.taobao.com/",                        "prompt": ""                    },                    {                        "name": "京东",                        "link": "http://www.360buy.com/",                        "prompt": ""                    },                    {                        "name": "亚马逊",                        "link": "http://www.amazon.cn/",                        "prompt": ""                    },                    {                        "name": "凡客",                        "link": "http://www.vancl.com/",                        "prompt": ""                    },                    {                        "name": "1号店",                        "link": "http://www.yihaodian.com/",                        "prompt": ""                    }                ]            }        ]    },    {        "title": "娱乐",        "list": [            {                "type": "影视",                "items": [                    {                        "name": "YouKu",                        "link": "http://www.youku.com/",                        "prompt": ""                    },                    {                        "name": "奇异",                        "link": "http://www.iqiyi.com/",                        "prompt": ""                    },                    {                        "name": "土豆",                        "link": "http://www.tudou.com/",                        "prompt": ""                    },                    {                        "name": "迅雷看看",                        "link": "http://www.xunlei.com/",                        "prompt": ""                    }                ]            },            {                "type": "音乐",                "items": [                    {                        "name": "百度MP3",                        "link": "http://mp3.baidu.com/",                        "prompt": ""                    },                    {                        "name": "QQ音乐",                        "link": "http://y.qq.com/",                        "prompt": ""                    }                ]            },            {                "type": "游戏",                "items": [                    {                        "name": "三国杀",                        "link": "http://www.sanguosha.com/",                        "prompt": ""                    },                    {                        "name": "4399游戏",                        "link": "http://www.4399.com/",                        "prompt": ""                    }                ]            }        ]    }]';
+
+    var TEST_DATA = require('./TestData.json')
 
     export default {
         components: {
@@ -35,7 +45,7 @@
                 // with hot-reload because the reloaded component
                 // preserves its current state and we are modifying
                 // its initial state.
-                blocks: JSON.parse(TEST_DATA)
+                blocks: TEST_DATA
             }
         },
 
@@ -56,6 +66,20 @@
         methods: {
             onDeleteBlock (index) {
                 this.blocks.splice(index, 1)
+            },
+
+            onEditAddBlock () {
+                var tpl = {
+                    "title": "新分组",
+                    "list": [{
+                        "type": "新类别",
+                        "items": [{"name": "新浪微博", "link": "https://weibo.com/", "prompt": "新浪微博"}]
+                    }]
+                }
+                this.blocks.unshift(tpl)
+//                this.$nextTick(function () {
+                    this.$children[0].editMode = true
+//                })
             }
         }
     }
