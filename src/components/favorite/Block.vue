@@ -25,17 +25,19 @@
                title="{{ item.prompt || item.name }}"
                target="{{ !editMode ? '_blank' : '' }}"
                class="dis-box box-horizontal align-center item_link {{ editMode ? 'item_link_edit' : '' }}">
-                <img :src="item.link + '/favicon.ico'" class="item_link_img"
+                <img :src="favIcon(item.link)" class="item_link_img"
                      @error="onLinkImgError($event)"/>
                 {{ item.name }}
                 <i v-if="editMode" @click="onEditItem(item)" class="icon iconfont item_control i_edit">&#xe60e;</i>
-                <i v-if="editMode" @click="onDeleteItem(list_row, $index)" class="icon iconfont item_control i_delete">&#xe60a;</i>
+                <i v-if="editMode" @click="onDeleteItem(list_row, $index)" class="icon iconfont item_control i_delete">
+                    &#xe60a;</i>
             </a>
 
             <span v-if="editMode" @click="onEditAddItem(list_row.items)" class="item_link item_link_add"><i
                     class="icon iconfont">&#xe611;</i>添加</span>
             <span class="flex"></span>
-            <span v-if="editMode" @click="onDeleteRow(block, $index)" class="item_link column_tail"><i class="icon iconfont i_close">&#xe60d;</i></span>
+            <span v-if="editMode" @click="onDeleteRow(block, $index)" class="item_link column_tail"><i
+                    class="icon iconfont i_close">&#xe60d;</i></span>
         </div>
 
         <!-- row for add new category -->
@@ -53,6 +55,7 @@
     require('src/css/flexbox.css')
 
     var tplEditItemBody = require('raw!./EditDialog.html').trim()
+
 
     export default {
 
@@ -99,6 +102,35 @@
         methods: {
             toggleEdit () {
                 this.editMode = !this.editMode
+            },
+
+            /*
+             http://www.example.org:80/hello.html?abc&arg=123&c=[a,b]#ac
+
+             hash: "#ac"
+             host: "www.example.org:80"
+             hostname: "www.example.org"
+             pathname: "/hello.html"
+             port: "80"
+             protocol: "http:"
+             search: "?abc&arg=123&c=[a,b]"
+             */
+            getLocation (href) {
+                var match = href.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)(\/[^?#]*)?(\?[^#]*|)(#.*|)$/);
+                return match && {
+                            protocol: match[1],
+                            host: match[2],
+                            hostname: match[3],
+                            port: match[4],
+                            pathname: match[5],
+                            search: match[6],
+                            hash: match[7]
+                        }
+            },
+
+            favIcon (link) {
+                var loc = this.getLocation(link)
+                return loc && loc.protocol && loc.host ? `${loc.protocol}//${loc.host}/favicon.ico` : '#'
             },
 
             onLinkImgError (event) {
