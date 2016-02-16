@@ -33,9 +33,11 @@
 </template>
 
 <script type="text/ecmascript-6">
+
     require('src/css/flexbox.css')
     import Block from './Block'
     import { API_AVOS as API } from '../API'
+    import store from '../Store'
 
 
     var TEST_DATA = require('./TestData.json')
@@ -70,7 +72,7 @@
                 }
             })
 
-            var token = this.$parent.user.token
+            var token = store.user.token
             if (token) {
                 API.getData(token).done(data => {
                     this.blocks = JSON.parse(data)
@@ -80,7 +82,7 @@
 
         events: {
             loggedin () {
-                API.getData(this.$parent.user.token).done(data => {
+                API.getData(store.user.token).done(data => {
                     this.blocks = JSON.parse(data)
                 })
             },
@@ -140,7 +142,7 @@
                 var reader = new FileReader();
                 reader.onload = function (event) {
                     var newData = event.target.result
-                    var token = this.$parent.user.token
+                    var token = store.user.token
 
                     API.getData(token, true).done((dummy, id) => {
 
@@ -149,7 +151,7 @@
                                 this.successImport(newData)
                             }).fail(this.failImport)
                         } else {
-                            var userId = this.$parent.user.id
+                            var userId = store.user.id
                             API.insertData(token, newData, userId).done(() => {
                                 this.successImport(newData)
                             }).fail(this.failImport)

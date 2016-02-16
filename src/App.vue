@@ -19,6 +19,7 @@
     import NavBar from './components/NavBar'
     import SideBar from './components/SideBar'
     import Favorite from './components/favorite/Favorite'
+    import store from './components/Store'
 
     var storage = $.localStorage
 
@@ -38,33 +39,15 @@
             var id = storage.get('id')
             var token = storage.get('token')
 
-            return {
-                user: {
-                    name: name,
-                    id: id,
-                    token: token
-                }
-            }
-        },
+            $.extend(store, {
+                user: {name, id, token}
+            })
 
-        computed: {
-            isLogin () {
-                return !!this.user.token
-            }
+            return store
         },
 
         methods: {
-            updateUserInfo (info) {
-                if (info) {
-                    var keys = Object.keys(this.user)
-                    for (var key of keys) {
-                        if (key in info) {
-                            this.user[key] = info[key]
-                            storage.set(key, info[key])
-                        }
-                    }
-                }
-            }
+
         }
 
     }
