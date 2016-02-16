@@ -35,11 +35,13 @@
 
         data () {
             var name = storage.get('name')
+            var id = storage.get('id')
             var token = storage.get('token')
 
             return {
                 user: {
                     name: name,
+                    id: id,
                     token: token
                 }
             }
@@ -54,13 +56,12 @@
         methods: {
             updateUserInfo (info) {
                 if (info) {
-                    if ('name' in info) {
-                        this.user.name = info.name
-                        storage.set('name', info.name)
-                    }
-                    if ('token' in info) {
-                        this.user.token = info.token
-                        storage.set('token', info.token)
+                    var keys = Object.keys(this.user)
+                    for (var key of keys) {
+                        if (key in info) {
+                            this.user[key] = info[key]
+                            storage.set(key, info[key])
+                        }
                     }
                 }
             }

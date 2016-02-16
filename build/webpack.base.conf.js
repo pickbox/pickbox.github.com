@@ -14,6 +14,7 @@ module.exports = {
       'toastr/toastr.scss',
       'dragula',
       'dragula/dragula.styl',
+      'FileSaver',
       'sui.js',
       'sui.less',
       'lib/bootstrap/less/bootstrap-grid.less'
@@ -32,7 +33,8 @@ module.exports = {
       'lib': path.resolve(__dirname, '../lib'),
       'sui.js': 'lib/sui/js/sui.js',
       'sui.less': 'lib/sui/less/sui.less',
-      'sui.css': 'lib/static/sui.css'
+      'sui.css': 'lib/static/sui.css',
+      'FileSaver': 'lib/FileSaver/FileSaver.js'
     }
   },
   resolveLoader: {
@@ -103,7 +105,8 @@ module.exports = {
       'window.jQuery': 'jquery',
       dragula: 'dragula',
       md5: 'blueimp-md5',
-      Toast: 'toastr'
+      Toast: 'toastr',
+      FileSaver: 'FileSaver'
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'

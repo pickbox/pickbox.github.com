@@ -44,14 +44,15 @@
             login () {
                 Login.login(this.$parent.user.name).done(result => {
                     this.$parent.updateUserInfo(result)
-                    API.getFavoriteData(this.$parent.user.token).done(result => {
-
-                    })
+                    this.$root.$broadcast('loggedin')
                 })
             },
 
             logout () {
-                Login.logout().done(this.$parent.updateUserInfo)
+                Login.logout().done(() => {
+                    this.$parent.updateUserInfo({token: ''})
+                    this.$root.$broadcast('loggedout')
+                })
             }
         }
 
