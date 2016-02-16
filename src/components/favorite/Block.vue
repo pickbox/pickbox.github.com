@@ -70,36 +70,49 @@
         },
 
         ready () {
-            var thiz = this;
+            this.init()
+        },
 
-            dragula($(".list_row", thiz.$el).get(), {
-                moves: function (el, container, handle) {
-                    return thiz.editMode &&
-                            (handle.className.indexOf('item_link_edit') >= 0 ||
-                            handle.className.indexOf('item_link_img') >= 0);
-                },
-                // sibling is en element after el, null means el would be placed as the last element
-                accepts: function (el, target, source, sibling) {
-                    return sibling != null && (sibling.className.indexOf('item_link_edit') >= 0 ||
-                            sibling.className.indexOf('item_link_add') >= 0);
-                }
-            })
-            dragula([thiz.$el], {
-                revertOnSpill: true,
-                moves: function (el, container, handle) {
-                    return thiz.editMode &&
-                            handle.className.indexOf('item_link_edit') < 0 &&
-                            el.className.indexOf('list_row_add') < 0 &&
-                            el.className.indexOf('titlebar') < 0;
-                },
-                accepts: function (el, target, source, sibling) {
-                    return sibling != null && (sibling.className.indexOf('list_row_edit') >= 0 ||
-                            sibling.className.indexOf('list_row_add') >= 0);
-                }
-            })
+        events: {
+            'init-block': function () {
+                this.init()
+            }
         },
 
         methods: {
+            init () {
+                var thiz = this;
+
+                this.drakeItem && this.drakeItem.destroy()
+                this.drakeRow && this.drakeRow.destroy()
+
+                this.drakeItem = dragula($(".list_row", thiz.$el).get(), {
+                    moves: function (el, container, handle) {
+                        return thiz.editMode &&
+                                (handle.className.indexOf('item_link_edit') >= 0 ||
+                                handle.className.indexOf('item_link_img') >= 0);
+                    },
+                    // sibling is en element after el, null means el would be placed as the last element
+                    accepts: function (el, target, source, sibling) {
+                        return sibling != null && (sibling.className.indexOf('item_link_edit') >= 0 ||
+                                sibling.className.indexOf('item_link_add') >= 0);
+                    }
+                })
+                this.drakeRow = dragula([thiz.$el], {
+                    revertOnSpill: true,
+                    moves: function (el, container, handle) {
+                        return thiz.editMode &&
+                                handle.className.indexOf('item_link_edit') < 0 &&
+                                el.className.indexOf('list_row_add') < 0 &&
+                                el.className.indexOf('titlebar') < 0;
+                    },
+                    accepts: function (el, target, source, sibling) {
+                        return sibling != null && (sibling.className.indexOf('list_row_edit') >= 0 ||
+                                sibling.className.indexOf('list_row_add') >= 0);
+                    }
+                })
+            },
+
             toggleEdit () {
                 this.editMode = !this.editMode
                 if (!this.editMode) {

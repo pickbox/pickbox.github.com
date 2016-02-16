@@ -1,14 +1,14 @@
 <template>
     <div id="favorite">
 
-        <div>
+        <div v-if="isLogin">
             <div class="sui-btn-group">
                 <button @click="onEditAddBlock" class="sui-btn btn-bordered btn-primary"><i class="icon iconfont">
                     &#xe611;</i>添加新组
                 </button>
             </div>
 
-            <div v-if="isLogin" class="sui-btn-group pull-right">
+            <div class="sui-btn-group pull-right">
                 <button class="sui-btn btn-bordered btn-primary file-upload">
                     <span v-if="!importing"><i class="icon iconfont">&#xe615;</i>导入<input @change="onImport($event)"
                                                                                           class="upload"
@@ -67,16 +67,30 @@
         },
 
         ready () {
-            $(".block").hover(function () {
-                $(this).find("#title_controls").show()
-            }, function () {
-                $(this).find("#title_controls").hide()
-            })
+            var drake = null;
 
-            dragula($("#block_group").get(), {
-                moves: function (el, container, handle) {
-                    return handle.className.indexOf('title') >= 0;
-                }
+            function init() {
+                $(".block").off('mouseenter mouseleave')
+
+                $(".block").hover(function () {
+                    $(this).find("#title_controls").show()
+                }, function () {
+                    $(this).find("#title_controls").hide()
+                })
+
+                drake && drake.destroy()
+                drake = dragula($("#block_group").get(), {
+                    moves: function (el, container, handle) {
+                        return handle.className.indexOf('title') >= 0;
+                    }
+                })
+            }
+
+            this.$watch('blocks', (newValue, oldValue) => {
+//                this.$nextTick(() => {
+                    init()
+                    this.$broadcast('init-block')
+//                })
             })
 
             var token = store.user.token
