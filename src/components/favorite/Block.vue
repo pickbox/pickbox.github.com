@@ -102,6 +102,9 @@
         methods: {
             toggleEdit () {
                 this.editMode = !this.editMode
+                if (!this.editMode) {
+                    this.$dispatch('save')
+                }
             },
 
             /*

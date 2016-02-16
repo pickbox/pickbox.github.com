@@ -8,7 +8,7 @@
                 </button>
             </div>
 
-            <div class="sui-btn-group pull-right">
+            <div v-if="isLogin" class="sui-btn-group pull-right">
                 <button class="sui-btn btn-bordered btn-primary file-upload">
                     <span v-if="!importing"><i class="icon iconfont">&#xe615;</i>导入<input @change="onImport($event)"
                                                                                           class="upload"
@@ -55,7 +55,14 @@
                 // preserves its current state and we are modifying
                 // its initial state.
                 blocks: TEST_DATA,
-                importing: false
+                importing: false,
+                saving: false
+            }
+        },
+
+        computed: {
+            isLogin () {
+                return !!store.user.token
             }
         },
 
@@ -89,12 +96,17 @@
 
             loggedout () {
                 this.blocks = TEST_DATA
+            },
+
+            save () {
+                this.onSave()
             }
         },
 
         methods: {
             onDeleteBlock (index) {
                 this.blocks.splice(index, 1)
+                this.onSave()
             },
 
             onEditAddBlock () {
@@ -114,7 +126,7 @@
             failImport (err) {
                 this.importing = false
                 Toast.clear()
-                Toast.error(`${err.code}: ${err.error}`)
+                Toast.error(`${err.code}: ${err.error}`, '导入失败')
             },
 
             successImport (data) {
@@ -144,6 +156,10 @@
                     var newData = event.target.result
                     var token = store.user.token
 
+                    if (!token) {
+                        return
+                    }
+
                     API.getData(token, true).done((dummy, id) => {
 
                         if (id) {
@@ -166,7 +182,41 @@
                 var fav = JSON.stringify(this.blocks)
                 var blob = new Blob([fav], {type: "text/plain;charset=utf-8"});
                 FileSaver.saveAs(blob, "favorite.json");
+            },
 
+
+            failSave () {
+                this.saving = false
+                Toast.clear()
+                Toast.error(`${err.code}: ${err.error}`, '保存失败')
+            },
+
+            successSave () {
+                this.saving = false
+                Toast.clear()
+                Toast.success('已保存')
+            },
+
+            onSave () {
+                var token = store.user.token
+                if (!token) {
+                    return
+                }
+
+                var data = JSON.stringify(this.blocks)
+                API.getData(token, true).done((dummy, id) => {
+
+                    if (id) {
+                        API.updateData(token, id, data).done(() => {
+                            this.successSave()
+                        }).fail(this.failSave)
+                    } else {
+                        var userId = store.user.id
+                        API.insertData(token, data, userId).done(() => {
+                            this.successSave()
+                        }).fail(this.failSave)
+                    }
+                }).fail(this.failSave)
             }
         }
     }
