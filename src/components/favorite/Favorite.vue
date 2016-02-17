@@ -40,7 +40,7 @@
 
     require('src/css/flexbox.css')
     import Block from './Block'
-    import { API_AVOS as API } from '../API'
+    import API from 'src/api/LeanCloud'
     import store from '../Store'
 
 
@@ -117,7 +117,6 @@
 
         methods: {
             fetchData (token) {
-                console.log($.height)
                 var token = store.user.token
                 if (token) {
                     this.loading = true

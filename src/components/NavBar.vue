@@ -30,7 +30,7 @@
 
 <script type="text/ecmascript-6">
     import Login from './Login'
-    import { API_AVOS as API } from './API'
+    import API from 'src/api/LeanCloud'
     import store from './Store'
 
     var storage = $.localStorage

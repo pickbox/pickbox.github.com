@@ -1,4 +1,4 @@
-import { API_AVOS as API } from './API'
+import API from 'src/api/LeanCloud'
 
 var tplLoginDlgBody = require('raw!./LoginDialog.html').trim()
 

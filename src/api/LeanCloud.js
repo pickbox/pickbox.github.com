@@ -1,10 +1,14 @@
-let APP_ID = '28usqm6hgo13ehfb9c57eo339jnhx20klmpkzcxzybk7j1rk'
-let APP_KEY = 'rs6uwhj8oo1kq9it1bzhg75hk3mv9ur7rdrdjdyrmq7m7aph'
+let APP_ID = 'ofk0Kl7wqrTUkHKKn5uPo6GS-gzGzoHsz'
+let APP_KEY = 'BvDz0V2KpbJlT5zPSankYQ9h'
 let HEADER_KEY_ID = 'X-LC-Id'
 let HEADER_KEY_KEY = 'X-LC-Key'
 let HEADER_KEY_TOKEN = 'X-LC-Session'
 
-class API_AVOS {
+let URL = 'https://api.leancloud.cn/1.1'
+let URL_LOGIN = URL + '/login'
+let URL_FAVORITE = URL + '/classes/Favorite'
+
+export default class {
 
     static ajaxFail (defer, jqXHR, textStatus, errorThrown) {
         console.log(jqXHR)
@@ -19,7 +23,7 @@ class API_AVOS {
         var defer = $.Deferred()
 
         $.ajax({
-            url: 'https://api.leancloud.cn/1.1/login',
+            url: URL_LOGIN,
             headers: {
                 [HEADER_KEY_ID]: APP_ID,
                 [HEADER_KEY_KEY]: APP_KEY
@@ -47,7 +51,7 @@ class API_AVOS {
         var defer = $.Deferred()
 
         $.ajax({
-            url: 'https://api.leancloud.cn/1.1/classes/Favorite',
+            url: URL_FAVORITE,
             headers: {
                 [HEADER_KEY_ID]: APP_ID,
                 [HEADER_KEY_KEY]: APP_KEY,
@@ -80,7 +84,7 @@ class API_AVOS {
         var defer = $.Deferred()
 
         $.ajax({
-            url: 'https://api.leancloud.cn/1.1/classes/Favorite/' + id,
+            url: URL_FAVORITE + '/' + id,
             headers: {
                 [HEADER_KEY_ID]: APP_ID,
                 [HEADER_KEY_KEY]: APP_KEY,
@@ -107,7 +111,7 @@ class API_AVOS {
         var defer = $.Deferred()
 
         $.ajax({
-            url: 'https://api.leancloud.cn/1.1/classes/Favorite',
+            url: URL_FAVORITE,
             headers: {
                 [HEADER_KEY_ID]: APP_ID,
                 [HEADER_KEY_KEY]: APP_KEY,
@@ -135,7 +139,7 @@ class API_AVOS {
         var defer = $.Deferred()
 
         $.ajax({
-            url: 'https://api.leancloud.cn/1.1/classes/Favorite/' + favId,
+            url: URL_FAVORITE + '/' + favId,
             headers: {
                 [HEADER_KEY_ID]: APP_ID,
                 [HEADER_KEY_KEY]: APP_KEY,
@@ -164,5 +168,3 @@ class API_AVOS {
     }
 
 }
-
-export {API_AVOS}
