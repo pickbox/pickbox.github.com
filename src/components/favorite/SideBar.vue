@@ -1,8 +1,8 @@
 <template>
-    <div v-show="!isEmpty" class="col-xs-3 col-md-2">
+    <div v-show="!isEmpty">
         <ul class="sui-nav nav-list">
             <!--<li class="nav-header">分类</li>-->
-            <li v-for="title in titles"><a :href="'#block' + $index">{{ title }}</a></li>
+            <li v-for="title in titles" track-by="$index"><a :href="'#block' + $index">{{ title }}</a></li>
         </ul>
     </div>
 </template>

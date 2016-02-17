@@ -1,5 +1,6 @@
 <template>
-    <div v-if="!loading" id="favorite" class="col-xs-9 col-md-10">
+<div>
+    <div v-if="!loading" id="favorite">
 
         <div v-if="isLogin">
             <div class="sui-btn-group">
@@ -22,23 +23,23 @@
             <div class="clearfix"></div>
         </div>
 
-        <div id="block_group" class="dis-box box-vertical">
-
-            <block v-for="block in blocks" :block="block" :index="$index" track-by="$index">
+        <div id="block_group" class="row">
+            <block v-for="block in blocks" :block="block" :index="$index" track-by="$index" class="col-xs-12 col-md-6 block-wrapper">
             </block>
-
         </div>
     </div>
 
     <div v-else class="dis-box box-vertical justify-center" :style="'height:' + windowHeight() / 2 + 'px'">
         <div class="sui-loading loading-xlarge"><i class="sui-icon icon-pc-loading"></i></div>
     </div>
-
+</div>
 </template>
 
 <script type="text/ecmascript-6">
 
     require('src/css/flexbox.css')
+    var Masonry = require('masonry-layout')
+
     import Block from './Block'
     import API from 'src/api/LeanCloud'
     import store from '../Store'
@@ -89,15 +90,23 @@
                         return handle.className.indexOf('title') >= 0;
                     }
                 })
+
+                var elem = this.$el.querySelector('#block_group');
+                this.msnry = new Masonry( elem, {
+                    itemSelector: '.block-wrapper',
+                });
+
+                this.$parent.$broadcast('fav-titles', this.blocks)
             }
 
             this.$watch('blocks', (newValue, oldValue) => {
 //                this.$nextTick(() => {
-                    this.$parent.$broadcast('fav-titles', newValue)
-                    init()
-                    this.$broadcast('init-block')
+                init.apply(this)
+                this.$broadcast('init-block')
 //                })
             })
+
+            init.apply(this)
 
             this.fetchData()
         },
@@ -113,6 +122,12 @@
 
             save () {
                 this.onSave()
+            },
+
+            'toggle-block-edit': function () {
+                this.$nextTick(() => {
+                    this.msnry && this.msnry.layout()
+                })
             }
         },
 

@@ -1,5 +1,5 @@
 <template>
-
+<div>
     <div id="{{ 'block' + index }}" class="dis-box box-vertical block">
 
         <!-- titlebar -->
@@ -47,7 +47,7 @@
         </div>
 
     </div>
-
+</div>
 </template>
 
 <script>
@@ -118,6 +118,7 @@
                 if (!this.editMode) {
                     this.$dispatch('save')
                 }
+                this.$dispatch('toggle-block-edit')
             },
 
             /*
@@ -273,7 +274,7 @@
 
 <style>
     .block {
-        float: left;
+        /*float: left;*/
         /*width: 350px;*/
         margin: 5px;
         border: 1px solid #C4C4C4;
