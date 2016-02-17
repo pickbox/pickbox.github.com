@@ -1,5 +1,5 @@
 <template>
-    <div id="favorite">
+    <div v-if="!loading" id="favorite">
 
         <div v-if="isLogin">
             <div class="sui-btn-group">
@@ -30,6 +30,10 @@
         </div>
     </div>
 
+    <div v-else class="dis-box box-vertical justify-center" :style="'height:' + windowHeight() / 2 + 'px'">
+        <div class="sui-loading loading-xlarge"><i class="sui-icon icon-pc-loading"></i></div>
+    </div>
+
 </template>
 
 <script type="text/ecmascript-6">
@@ -56,7 +60,8 @@
                 // its initial state.
                 blocks: TEST_DATA,
                 importing: false,
-                saving: false
+                saving: false,
+                loading: false
             }
         },
 
@@ -93,19 +98,12 @@
 //                })
             })
 
-            var token = store.user.token
-            if (token) {
-                API.getData(token).done(data => {
-                    this.blocks = JSON.parse(data)
-                })
-            }
+            this.fetchData()
         },
 
         events: {
             loggedin () {
-                API.getData(store.user.token).done(data => {
-                    this.blocks = JSON.parse(data)
-                })
+                this.fetchData()
             },
 
             loggedout () {
@@ -118,6 +116,23 @@
         },
 
         methods: {
+            fetchData (token) {
+                console.log($.height)
+                var token = store.user.token
+                if (token) {
+                    this.loading = true
+                    API.getData(token).done(data => {
+                        this.blocks = JSON.parse(data)
+                    }).always(() => {
+                        this.loading = false
+                    })
+                }
+            },
+
+            windowHeight () {
+                return document.documentElement['clientHeight']
+            },
+
             onDeleteBlock (index) {
                 this.blocks.splice(index, 1)
                 this.onSave()
