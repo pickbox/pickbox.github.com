@@ -1,7 +1,7 @@
 <template>
     <div class="sui-navbar navbar-inverse">
         <div class="navbar-inner">
-            <a href="#" class="sui-brand">Pickbox</a>'
+            <a href="#" class="sui-brand">PickBox</a>'
             <ul class="sui-nav">
                 <li class="active"><a href="#">收藏夹</a></li>
                 <li><a href="http://blog.pickbox.me" target="_blank">博客</a></li>
