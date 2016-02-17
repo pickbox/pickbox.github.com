@@ -1,18 +1,37 @@
 <template>
-    <ul class="sui-nav nav-list">
-        <li class="nav-header">服装</li>
-        <li class="active"><a href="#">阿迪达斯</a></li>
-        <li><a href="#">耐克</a></li>
-        <li><a href="#">New Balance</a></li>
-        <li class="nav-header">美食</li>
-        <li><a href="#">湘菜</a></li>
-        <li><a href="#">自助</a></li>
-        <li><a href="#">日料</a></li>
-    </ul>
+    <div v-show="!isEmpty" class="col-xs-3 col-md-2">
+        <ul class="sui-nav nav-list">
+            <!--<li class="nav-header">分类</li>-->
+            <li v-for="title in titles"><a :href="'#block' + $index">{{ title }}</a></li>
+        </ul>
+    </div>
 </template>
 
 <script>
     export default {
 
+        data () {
+            return {
+                titles: []
+            }
+        },
+
+        computed: {
+            isEmpty () {
+                return this.titles.length === 0
+            }
+        },
+
+        events: {
+            'fav-titles' (blocks) {
+                var list = []
+                for (var block of blocks) {
+                    list.push(block.title)
+                }
+                this.titles = list
+            }
+        },
+
+        methods: {}
     }
 </script>

@@ -1,12 +1,8 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-xs-3 col-md-2">
-                <side-bar></side-bar>
-            </div>
-            <div class="col-xs-9 col-md-10">
-                <favorite></favorite>
-            </div>
+            <side-bar></side-bar>
+            <favorite></favorite>
         </div>
     </div>
 </template>

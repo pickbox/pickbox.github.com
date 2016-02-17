@@ -1,6 +1,6 @@
 <template>
 
-    <div id="block" class="dis-box box-vertical block">
+    <div id="{{ 'block' + index }}" class="dis-box box-vertical block">
 
         <!-- titlebar -->
         <div class="dis-box box-horizontal align-center titlebar">
@@ -146,7 +146,6 @@
 
             favIcon (link) {
                 var loc = this.getLocation(link)
-                loc = null
                 return loc && loc.protocol && loc.host ? `${loc.protocol}//${loc.host}/favicon.ico` : '#'
             },
 

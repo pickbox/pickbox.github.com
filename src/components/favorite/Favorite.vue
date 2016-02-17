@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!loading" id="favorite">
+    <div v-if="!loading" id="favorite" class="col-xs-9 col-md-10">
 
         <div v-if="isLogin">
             <div class="sui-btn-group">
@@ -93,6 +93,7 @@
 
             this.$watch('blocks', (newValue, oldValue) => {
 //                this.$nextTick(() => {
+                    this.$parent.$broadcast('fav-titles', newValue)
                     init()
                     this.$broadcast('init-block')
 //                })
