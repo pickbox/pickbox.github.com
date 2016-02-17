@@ -1,0 +1,32 @@
+sui:
+
+diff --git a/js/validate-rules.js b/js/validate-rules.js
+index b0aa864..6994858 100644
+--- a/js/validate-rules.js
++++ b/js/validate-rules.js
+@@ -1,7 +1,7 @@
+ // add rules
+ !function($) {
+-  Validate = $.validate;
+-  trim = function(v) {
++  var Validate = $.validate;
++  var trim = function(v) {
+     if (!v) return v;
+     return v.replace(/^\s+/g, '').replace(/\s+$/g, '')
+   };
+
+diff --git a/less/navbar.less b/less/navbar.less
+index eefab42..56983d5 100644
+--- a/less/navbar.less
++++ b/less/navbar.less
+@@ -196,7 +196,8 @@
+ .navbar-static-top .sui-container,
+ .navbar-fixed-top .sui-container,
+ .navbar-fixed-bottom .sui-container {
+-  #grid > .core > .span(@gridColumns);
++//  #grid > .core > .span(@gridColumns);
++    width: (@gridColumnWidth * @gridColumns) + (@gridGutterWidth * (@gridColumns - 1));
+ }
+
+bootstrap:
+add bootstrap/less/bootstrap-grid.less to build only the grid css
