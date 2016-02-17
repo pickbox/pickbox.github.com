@@ -30,8 +30,8 @@
 
 <script type="text/ecmascript-6">
     import Login from './Login'
-    import API from 'src/api/LeanCloud'
     import store from './Store'
+    import API from 'src/api/LeanCloud'
 
     var storage = $.localStorage
 

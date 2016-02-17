@@ -2,23 +2,16 @@
     <div>
         <nav-bar></nav-bar>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-3 col-md-2">
-                    <side-bar></side-bar>
-                </div>
-                <div class="col-xs-9 col-md-10">
-                    <favorite></favorite>
-                </div>
-            </div>
-        </div>
+        <fav-content></fav-content>
+
+        <foot-bar></foot-bar>
     </div>
 </template>
 
 <script>
     import NavBar from './components/NavBar'
-    import SideBar from './components/SideBar'
-    import Favorite from './components/favorite/Favorite'
+    import FootBar from './components/FootBar'
+    import FavContent from './components/favorite/Content'
     import store from './components/Store'
 
     var storage = $.localStorage
@@ -30,8 +23,8 @@
 
         components: {
             NavBar,
-            SideBar,
-            Favorite
+            FootBar,
+            FavContent
         },
 
         data () {

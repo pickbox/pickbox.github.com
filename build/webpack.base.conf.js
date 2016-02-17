@@ -8,16 +8,17 @@ module.exports = {
     app: './src/main.js',
     vendor: [
       'jquery',
+      'sui.js',
+      'sui.less',
+      'lib/bootstrap/less/bootstrap-grid.less',
+
       'blueimp-md5',
       'jquery-storage-api/jquery.storageapi.js',
       'toastr',
       'toastr/toastr.scss',
       'dragula',
       'dragula/dragula.styl',
-      'FileSaver',
-      'sui.js',
-      'sui.less',
-      'lib/bootstrap/less/bootstrap-grid.less'
+      'FileSaver'
     ]
   },
   output: {

@@ -146,6 +146,7 @@
 
             favIcon (link) {
                 var loc = this.getLocation(link)
+                loc = null
                 return loc && loc.protocol && loc.host ? `${loc.protocol}//${loc.host}/favicon.ico` : '#'
             },
 
