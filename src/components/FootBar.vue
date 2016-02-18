@@ -1,7 +1,6 @@
 <template>
     <div class="col-xs-12 site-info">
-        © {{ new Date(). getFullYear() }}<a href="http://www.pickbox.me/" title="PickBox" rel="home">
-        PickBox</a>
+        © {{ new Date(). getFullYear() }}<a href="http://www.pickbox.me/" title="PickBox" rel="home"> PickBox</a>
     </div>
 </template>
 <style>
