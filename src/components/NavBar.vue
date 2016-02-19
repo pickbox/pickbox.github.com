@@ -33,6 +33,7 @@
     import store from './Store'
     import API from 'src/api/LeanCloud'
 
+    require('jquery-storage-api/jquery.storageapi.js')
     var storage = $.localStorage
 
     export default {

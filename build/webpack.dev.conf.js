@@ -23,7 +23,12 @@ config.plugins = (config.plugins || []).concat([
   new webpack.optimize.OccurenceOrderPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoErrorsPlugin(),
-  new ExtractTextPlugin('[name].css'),
+  new webpack.DefinePlugin({
+    DEBUG: true
+  }),
+  new ExtractTextPlugin('[name].css', {
+    allChunks: true
+  }),
   // https://github.com/ampedandwired/html-webpack-plugin
   new HtmlWebpackPlugin({
     filename: 'index.html',

@@ -38,7 +38,6 @@
 <script type="text/ecmascript-6">
 
     require('src/css/flexbox.css')
-    var Masonry = require('masonry-layout')
 
     import Block from './Block'
     import API from 'src/api/LeanCloud'

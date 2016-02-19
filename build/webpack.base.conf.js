@@ -10,16 +10,18 @@ module.exports = {
       'jquery',
       'sui.js',
       'sui.less',
-      'lib/bootstrap/less/bootstrap-grid.less',
-
-      'blueimp-md5',
-      'jquery-storage-api/jquery.storageapi.js',
-      'toastr',
-      'toastr/toastr.scss',
-      'dragula',
-      'dragula/dragula.styl',
-      'FileSaver'
-    ]
+      'lib/bootstrap/less/bootstrap-grid.less'
+    ],
+    //favlib: [
+    //  'blueimp-md5',
+    //  'jquery-storage-api/jquery.storageapi.js',
+    //  'toastr',
+    //  'toastr/toastr.scss',
+    //  'dragula',
+    //  'dragula/dragula.styl',
+    //  'FileSaver',
+    //  'masonry-layout'
+    //]
   },
   output: {
     path: path.resolve(__dirname, '../dist/static'),
@@ -95,7 +97,8 @@ module.exports = {
     loaders: {
 //      js: 'babel!eslint'
       js: 'babel',
-      css: ExtractTextPlugin.extract('css')
+      //css: ExtractTextPlugin.extract('css')
+      css: ExtractTextPlugin.extract('vue-style', 'css')
     }
   },
   plugins: [
@@ -104,13 +107,16 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
+      Vue: 'vue',
       dragula: 'dragula',
       md5: 'blueimp-md5',
       Toast: 'toastr',
-      FileSaver: 'FileSaver'
+      FileSaver: 'FileSaver',
+      Masonry: 'masonry-layout'
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
+      name: ['common', 'vendor'],
+      minChunks: 2
     }),
   ],
   eslint: {
