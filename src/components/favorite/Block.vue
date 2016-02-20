@@ -16,11 +16,13 @@
 
         <!-- rows -->
         <div v-for="list_row in block.list"
+             data-index="{{$index}}"
              class="dis-box box-horizontal align-center flex-wrap list_row {{ $index % 2 === 1 ? 'even' : '' }} {{ editMode ? 'list_row_edit' : '' }}">
             <span class="column_type">{{ list_row.type }}<i v-if="editMode" @click="onEditItemsType(list_row)"
                                                             class="icon iconfont item_control">&#xe60e;</i></span>
             <span class="column_seperator">|</span>
             <a v-for="item in list_row.items"
+               data-index="{{$index}}"
                :href="editMode ? '#' : item.link"
                title="{{ item.prompt || item.name }}"
                target="{{ !editMode ? '_blank' : '' }}"
@@ -50,7 +52,8 @@
 </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
+    require('dragula/dragula.styl')
     require("src/assets/fonts/iconfont.css");
     require('src/css/flexbox.css')
 
@@ -96,9 +99,44 @@
                     accepts: function (el, target, source, sibling) {
                         return sibling != null && (sibling.className.indexOf('item_link_edit') >= 0 ||
                                 sibling.className.indexOf('item_link_add') >= 0);
+                    },
+                })
+
+                this.drakeItem.on('drop', (el, target, source, sibling) => {
+
+                    if (target === source && target != null) {
+                        var rowIndex = $(target).attr('data-index')
+                        var oldItemsData = thiz.block.list[rowIndex].items
+
+                        var newItemsData = []
+                        $('a', target).each((i, elem) => {
+                            var index = $(elem).attr('data-index')
+                            newItemsData.push(oldItemsData[index])
+                        })
+
+                        thiz.block.list[rowIndex].items = newItemsData
+
+                    } else {
+                        var itemData = null
+                        if (source != null) {
+                            var srcRowIndex = $(source).attr('data-index')
+                            var srcItemIndex = $(el).attr('data-index')
+                            itemData = thiz.block.list[srcRowIndex].items[srcItemIndex]
+                            thiz.block.list[srcRowIndex].items.splice(srcItemIndex, 1)
+                        }
+                        if (target != null && itemData != null) {
+                            var targetRowIndex = $(target).attr('data-index')
+                            var siblingIndex = $(sibling).attr('data-index')
+                            if (siblingIndex === undefined) {
+                                thiz.block.list[targetRowIndex].items.push(itemData)
+                            } else {
+                                thiz.block.list[targetRowIndex].items.splice(siblingIndex, 0, itemData)
+                            }
+                        }
                     }
                 })
-                this.drakeRow = dragula([thiz.$el], {
+
+                this.drakeRow = dragula($(".block", thiz.$el).get(), {
                     revertOnSpill: true,
                     moves: function (el, container, handle) {
                         return thiz.editMode &&

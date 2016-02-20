@@ -36,7 +36,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-
+    require('dragula/dragula.styl')
+    require('toastr/toastr.scss')
     require('src/css/flexbox.css')
 
     import Block from './Block'
