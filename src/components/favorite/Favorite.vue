@@ -84,17 +84,17 @@
                     $(this).find("#title_controls").hide()
                 })
 
+                var elem = this.$el.querySelector('#block_group');
+                this.msnry = new Masonry( elem, {
+                    itemSelector: '.block-wrapper',
+                });
+
                 drake && drake.destroy()
                 drake = dragula($("#block_group").get(), {
                     moves: function (el, container, handle) {
                         return handle.className.indexOf('title') >= 0;
                     }
                 })
-
-                var elem = this.$el.querySelector('#block_group');
-                this.msnry = new Masonry( elem, {
-                    itemSelector: '.block-wrapper',
-                });
 
                 this.$parent.$broadcast('fav-titles', this.blocks)
             }

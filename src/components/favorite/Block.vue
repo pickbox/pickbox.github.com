@@ -110,7 +110,7 @@
                         var oldItemsData = thiz.block.list[rowIndex].items
 
                         var newItemsData = []
-                        $('a', target).each((i, elem) => {
+                        $('.item_link_edit', target).each((i, elem) => {
                             var index = $(elem).attr('data-index')
                             newItemsData.push(oldItemsData[index])
                         })
@@ -150,6 +150,19 @@
                             return false
 
                         return true
+                    }
+                })
+
+                this.drakeRow.on('drop', (el, target, source, sibling) => {
+                    if (source != null) {
+                        var oldRowsData = thiz.block.list
+                        var newRowsData = []
+                        $('.list_row_edit', source).each((i, elem) => {
+                            var index = $(elem).attr('data-index')
+                            newRowsData.push(oldRowsData[index])
+
+                        })
+                        thiz.block.list = newRowsData
                     }
                 })
             },
