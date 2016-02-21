@@ -44,7 +44,7 @@
 
         <!-- row for add new category -->
         <div v-if="editMode" @click="onEditAddRow(block.list)"
-             class="dis-box box-horizontal justify-center list_row column_type list_row_add">
+             class="dis-box box-horizontal justify-center list_row list_row_add">
             <span v-if="editMode"><i class="icon iconfont">&#xe611;</i>添加新类别</span>
         </div>
 
@@ -90,16 +90,17 @@
                 this.drakeRow && this.drakeRow.destroy()
 
                 this.drakeItem = dragula($(".list_row", thiz.$el).get(), {
-                    moves: function (el, container, handle) {
-                        return thiz.editMode &&
-                                (handle.className.indexOf('item_link_edit') >= 0 ||
-                                handle.className.indexOf('item_link_img') >= 0);
-                    },
-                    // sibling is en element after el, null means el would be placed as the last element
                     accepts: function (el, target, source, sibling) {
                         return sibling != null && (sibling.className.indexOf('item_link_edit') >= 0 ||
                                 sibling.className.indexOf('item_link_add') >= 0);
                     },
+                    invalid: function (el, handle) {
+                        if (thiz.editMode && (el.className.indexOf('item_link_edit') >= 0 ||
+                                el.className.indexOf('item_link_img') >= 0))
+                            return false
+
+                        return true
+                    }
                 })
 
                 this.drakeItem.on('drop', (el, target, source, sibling) => {
@@ -138,15 +139,17 @@
 
                 this.drakeRow = dragula($(".block", thiz.$el).get(), {
                     revertOnSpill: true,
-                    moves: function (el, container, handle) {
-                        return thiz.editMode &&
-                                handle.className.indexOf('item_link_edit') < 0 &&
-                                el.className.indexOf('list_row_add') < 0 &&
-                                el.className.indexOf('titlebar') < 0;
-                    },
                     accepts: function (el, target, source, sibling) {
                         return sibling != null && (sibling.className.indexOf('list_row_edit') >= 0 ||
                                 sibling.className.indexOf('list_row_add') >= 0);
+                    },
+                    invalid: function (el, handle) {
+                        if (thiz.editMode && (el.className.indexOf('list_row_edit') >= 0 ||
+                                el.className.indexOf('column_type') >= 0 ||
+                                el.className.indexOf('column_seperator') >= 0))
+                            return false
+
+                        return true
                     }
                 })
             },
@@ -387,6 +390,8 @@
 
     .list_row_add {
         cursor: pointer;
+        background: #28a3ef;
+        color: #fff;
     }
 
     .list_row_add:hover {
