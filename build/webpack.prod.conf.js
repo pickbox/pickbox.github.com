@@ -23,12 +23,19 @@ function generateExtractLoaders (loaders) {
 
 config.vue.loaders = {
   //js: 'babel!eslint',
+  js: 'strip-debug!babel',
   // http://vuejs.github.io/vue-loader/configurations/extract-css.html
   css: ExtractTextPlugin.extract('vue-style-loader', generateExtractLoaders(['css'])),
   less: ExtractTextPlugin.extract('vue-style-loader', generateExtractLoaders(['css', 'less'])),
   sass: ExtractTextPlugin.extract('vue-style-loader', generateExtractLoaders(['css', 'sass'])),
   stylus: ExtractTextPlugin.extract('vue-style-loader', generateExtractLoaders(['css', 'stylus']))
 }
+
+config.module.loaders.forEach(function (item) {
+  if (typeof(item.loader) === 'string' && item.loader.indexOf('babel') === 0) {
+    item.loader = 'strip-debug!' + item.loader
+  }
+})
 
 config.plugins = (config.plugins || []).concat([
   // http://vuejs.github.io/vue-loader/workflow/production.html
