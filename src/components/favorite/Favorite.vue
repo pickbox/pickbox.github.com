@@ -44,6 +44,8 @@
     import API from 'src/api/LeanCloud'
     import store from '../Store'
 
+//    import Packery from 'packery'
+//    import Draggabilly from 'draggabilly'
 
     var TEST_DATA = require('./TestData.json')
     Toast.options.positionClass = "toast-bottom-center"
@@ -88,6 +90,15 @@
                 this.msnry = new Masonry( elem, {
                     itemSelector: '.block-wrapper',
                 });
+//                var pckry = new Packery( elem, {
+//                    // options
+//                    itemSelector: '.block-wrapper',
+//                    gutter: 0
+//                });
+//                $('.block-wrapper', elem).each((i, el) => {
+//                    var draggie = new Draggabilly(el)
+//                    pckry.bindDraggabillyEvents(draggie)
+//                })
 
                 drake && drake.destroy()
                 drake = dragula($("#block_group").get(), {
