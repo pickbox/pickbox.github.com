@@ -1,6 +1,6 @@
 {
-  "name": "Pickbox",
-  "description": "A Vue.js project",
+  "name": "pickbox",
+  "description": "pickbox - pick as you wish",
   "author": "jfo <jfojfo@gmail.com>",
   "private": true,
   "scripts": {
