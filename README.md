@@ -19,3 +19,13 @@ npm test
 ```
 
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## release
+1. work on branch dev
+2. npm run build
+3. git co master
+4. cp -r dist/* .
+5. git ci -m "xxx"
+6. git push origin master:master
+7. git push origin master:release-x.x.x
+
