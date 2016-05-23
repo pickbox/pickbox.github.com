@@ -240,7 +240,7 @@
             },
 
 
-            failSave () {
+            failSave (err) {
                 this.saving = false
                 Toast.clear()
                 Toast.error(`${err.code}: ${err.error}`, '保存失败')

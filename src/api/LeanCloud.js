@@ -59,7 +59,7 @@ export default class {
             },
             data: {
                 limit: 1,
-                keys: onlyId ? '' : 'data'
+                keys: onlyId ? 'objectId' : 'data'
             }
         }).done((data, textStatus, jqXHR) => {
             //{results: [{createdAt: "2016-02-15T09:41:52.345Z", data: "xxx", objectId: "56c19d60c24aa800534cc54b", updatedAt: "2016-02-15T09:46:33.031Z"}]}
