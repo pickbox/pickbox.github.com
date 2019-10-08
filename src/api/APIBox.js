@@ -1,5 +1,5 @@
-//let URL = 'https://pickbox.cc/api/favorite'
-let URL = 'http://127.0.0.1:8099/api/favorite'
+let URL = 'https://pickbox.cc/api/favorite'
+//let URL = 'http://127.0.0.1:8099/api/favorite'
 let URL_LOGIN = URL + '/login'
 let URL_FAVORITE = URL + '/get'
 let URL_FAVORITE_UPDATE = URL + '/update'
