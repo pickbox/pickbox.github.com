@@ -29,3 +29,8 @@ For detailed explanation on how things work, consult the [docs for vue-loader](h
 6. git push origin master:master
 7. git push origin master:release-x.x.x
 
+## version
+use node-v4.2.1 to build
+
+PATH=/Users/jfo/bin/node-v4.2.1-darwin-x64/bin:$PATH npm run build
+

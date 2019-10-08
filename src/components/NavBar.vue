@@ -31,7 +31,7 @@
 <script type="text/ecmascript-6">
     import Login from './Login'
     import store from './Store'
-    import API from 'src/api/LeanCloud'
+    import API from 'src/api/APIBox'
 
     require('jquery-storage-api/jquery.storageapi.js')
     var storage = $.localStorage

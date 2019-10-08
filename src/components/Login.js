@@ -1,5 +1,5 @@
 require('toastr/toastr.scss')
-import API from 'src/api/LeanCloud'
+import API from 'src/api/APIBox'
 
 var tplLoginDlgBody = require('raw!./LoginDialog.html').trim()
 

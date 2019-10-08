@@ -41,7 +41,7 @@
     require('src/css/flexbox.css')
 
     import Block from './Block'
-    import API from 'src/api/LeanCloud'
+    import API from 'src/api/APIBox'
     import store from '../Store'
 
 //    import Packery from 'packery'
