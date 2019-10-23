@@ -30,7 +30,7 @@
     "copy-webpack-plugin": "^1.1.1",
     "css-loader": "^0.23.0",
     "draggabilly": "^2.1.0",
-    "eslint": "^1.10.3",
+    "eslint": "^4.19.1",
     "eslint-friendly-formatter": "^1.2.2",
     "eslint-loader": "^1.2.0",
     "eventsource-polyfill": "^0.9.6",
