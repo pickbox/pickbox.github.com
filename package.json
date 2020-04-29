@@ -12,7 +12,7 @@
   "dependencies": {
     "blueimp-md5": "^2.1.0",
     "dragula": "^3.6.6",
-    "jquery": "^2.2.0",
+    "jquery": "^3.5.0",
     "jquery-storage-api": "^1.7.5",
     "masonry-layout": "^4.0.0",
     "toastr": "^2.1.2",
